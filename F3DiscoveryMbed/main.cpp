@@ -7,19 +7,45 @@ you may not use this file except in compliance with the License.
 
 You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
+ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
 either express or implied.
 
 See the License for the specific language governing permissions and limitations under the License.
 */
 #include "mbed.h"
+//#include "USBCDC.h"
+
+
+
+//USBCDC cdc;
 
 // main() runs in its own thread in the OS
-int main()
-{
+int main() {
+    SPI spi(PA_7, PA_6, PA_5);
+    DigitalOut cs(PE_3);
+    cs = 1;
+    spi.format(8, 3);
+    spi.frequency(10000000);
+    cs = 0;
+    spi.write(0x20);
+    spi.write(0b11101111);
+    cs = 1;
     while (true) {
-
+        cs = 0;
+        spi.write(0b10101000);
+        int received = 0;
+        received = spi.write(0x00);
+        printf("%X\n", received);
+        cs = 1;
+        wait(1);
+        cs = 0;
+        spi.write(0b10101001);
+        received = 0;
+        received = spi.write(0x00);
+        printf("%X\n", received);
+        cs = 1;
+        wait(1);
     }
 }
 
