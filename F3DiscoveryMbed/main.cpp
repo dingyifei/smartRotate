@@ -14,11 +14,11 @@ either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 */
 #include "mbed.h"
-//#include "USBCDC.h"
+#include "USBCDC.h"
+#include "L3GD20.h"
 
 
-
-//USBCDC cdc;
+USBCDC cdc;
 
 // main() runs in its own thread in the OS
 int main() {
@@ -31,21 +31,19 @@ int main() {
     spi.write(0x20);
     spi.write(0b11101111);
     cs = 1;
-    while (true) {
-        cs = 0;
-        spi.write(0b10101000);
-        int received = 0;
-        received = spi.write(0x00);
-        printf("%X\n", received);
-        cs = 1;
-        wait(1);
-        cs = 0;
-        spi.write(0b10101001);
-        received = 0;
-        received = spi.write(0x00);
-        printf("%X\n", received);
-        cs = 1;
-        wait(1);
-    }
+    cs = 0;
+    spi.write(0b10101000);
+    int received = 0;
+    received = spi.write(0x00);
+    printf("%X\n", received);
+    cs = 1;
+
+    thread_sleep_for(1000);
+    cs = 0;
+    spi.write(0b10101001);
+    received = spi.write(0x00);
+    printf("%X\n", received);
+    cs = 1;
+    thread_sleep_for(1000);
 }
 

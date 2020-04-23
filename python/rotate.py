@@ -45,15 +45,15 @@ def get_displays():
 
 def get_displays_info(displays: list):
     # display_count = win32api.GetSystemMetrics(80)
-    displays = []
+    display_infos = []
 
-    for adapter in displays:
+    for display in displays:
         try:
-            display = win32api.EnumDisplayDevices(adapter.DeviceName, 0)  # the 0 here is a magic number, take caution
-            displays.append(display)
+            display_info = win32api.EnumDisplayDevices(display.DeviceName, 0)  # the 0 here is a magic number, take caution
+            displays.append(display_info)
         except pywintypes.error:
             continue
-    return displays
+    return display_infos
 
 
 def main():
