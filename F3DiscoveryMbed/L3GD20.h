@@ -18,24 +18,32 @@ See the License for the specific language governing permissions and limitations 
 #define F3DISCOVERYMBED_L3GD20_H
 #include "mbed.h"
 #include "L3GD20_REG.h"
-struct l3gd20StartupConfig{
-    int CTRL_REG2;
-    int CTRL_REG3;
-    int CTRL_REG4;
-    int CTRL_REG5;
-    int REFERENCE;
-    int INT1_THS_XH;
-    int INT1_THS_XL;
-    int INT1_THS_YH;
-    int INT1_THS_YL;
-    int INT1_THS_ZH;
-    int INT1_THS_ZL;
-    int INT1_CFG;
-    int CTRL_REG1;
+struct l3Gd20StartupConfig{
+    int ctrlReg2 = 0b00000000;
+    int ctrlReg3 = 0b00000000;
+    int ctrlReg4 = 0b00000000;
+    int ctrlReg5 = 0b00000000;
+    int reference = 0b00000000;
+    int int1ThsXh = 0b00000000;
+    int int1ThsXl = 0b00000000;
+    int int1ThsYh = 0b00000000;
+    int int1ThsYl = 0b00000000;
+    int int1ThsZh = 0b00000000;
+    int int1ThsZl = 0b00000000;
+    int int1Duration = 0b00000000;
+    int int1Cfg = 0b00000000;
+    int ctrlReg1 = 0b00000111;
 };
-
-
-int readL3gd20(SPI*, DigitalOut*, int, int*);
-int writeL3gd20(SPI *L3GD20, DigitalOut *cs, int REG, int data);
-int startL3gd20(SPI *L3GD20, DigitalOut *cs, l3gd20StartupConfig startupConfig);
+struct l3Gd20Out{
+    int xL;
+    int xH;
+    int yL;
+    int yH;
+    int zL;
+    int zH;
+};
+int readL3Gd20(SPI *, DigitalOut *, int, int *);
+int writeL3Gd20(SPI *, DigitalOut *, int, int);
+int startL3Gd20(SPI *, DigitalOut *, l3Gd20StartupConfig);
+int readL3Gd20Axis(SPI *, DigitalOut*, l3Gd20Out*);
 #endif //F3DISCOVERYMBED_L3GD20_H

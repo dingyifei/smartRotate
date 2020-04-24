@@ -27,23 +27,6 @@ int main() {
     cs = 1;
     spi.format(8, 3);
     spi.frequency(10000000);
-    cs = 0;
-    spi.write(0x20);
-    spi.write(0b11101111);
-    cs = 1;
-    cs = 0;
-    spi.write(0b10101000);
-    int received = 0;
-    received = spi.write(0x00);
-    printf("%X\n", received);
-    cs = 1;
 
-    thread_sleep_for(1000);
-    cs = 0;
-    spi.write(0b10101001);
-    received = spi.write(0x00);
-    printf("%X\n", received);
-    cs = 1;
-    thread_sleep_for(1000);
 }
 

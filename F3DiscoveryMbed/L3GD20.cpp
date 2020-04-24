@@ -15,34 +15,57 @@ See the License for the specific language governing permissions and limitations 
 */
 #include "L3GD20.h"
 
-int readL3gd20(SPI *L3GD20, DigitalOut *cs, int REG, int *data) {
-    L3GD20->lock();
+int readL3Gd20(SPI *l3Gd20, DigitalOut *cs, int reg, int *data) {
+    l3Gd20->lock();
     *cs = 0;
-    L3GD20->write(REG + L3GD20_REG_READ);
-    *data = L3GD20->write(0x00);
+    l3Gd20->write(reg + L3GD20_REG_READ);
+    *data = l3Gd20->write(0x00);
     *cs = 1;
-    L3GD20->unlock();
+    l3Gd20->unlock();
     return 0;
 }
 
-int writeL3gd20(SPI *L3GD20, DigitalOut *cs, int REG, int data) {
-    L3GD20->lock();
+int writeL3Gd20(SPI *l3Gd20, DigitalOut *cs, int reg, int data) {
+    l3Gd20->lock();
     *cs = 0;
-    L3GD20->write(REG + L3GD20_REG_WRITE);
-    L3GD20->write(data);
+    l3Gd20->write(reg + L3GD20_REG_WRITE);
+    l3Gd20->write(data);
     *cs = 1;
-    L3GD20->unlock();
+    l3Gd20->unlock();
     return 0;
 }
 
-int startL3gd20(SPI *L3GD20, DigitalOut *cs, l3gd20StartupConfig startupConfig){
-    writeL3gd20(L3GD20, cs, L3GD20_REG_CTRL_REG2, startupConfig.CTRL_REG2);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_CTRL_REG3, startupConfig.CTRL_REG3);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_CTRL_REG4, startupConfig.CTRL_REG4);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_CTRL_REG5, startupConfig.CTRL_REG5);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_REFERENCE, startupConfig.REFERENCE);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_INT1_THS_XH, startupConfig.INT1_THS_XH);
-    writeL3gd20(L3GD20, cs, L3GD20_REG_INT1_THS_XL, startupConfig.INT1_THS_XL);
-
-
+int startL3Gd20(SPI *l3Gd20, DigitalOut *cs, l3Gd20StartupConfig startupConfig) {
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG2, startupConfig.ctrlReg2);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG3, startupConfig.ctrlReg3);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG4, startupConfig.ctrlReg4);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG5, startupConfig.ctrlReg5);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_REFERENCE, startupConfig.reference);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_H, startupConfig.int1ThsXh);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_L, startupConfig.int1ThsXl);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_H, startupConfig.int1ThsYh);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_L, startupConfig.int1ThsYl);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_H, startupConfig.int1ThsZh);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_THS_X_L, startupConfig.int1ThsZl);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_DURATION, startupConfig.int1Duration);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_INT1_CFG, startupConfig.int1Cfg);
+    writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG1, startupConfig.ctrlReg1);
+    return 0;
 }
+int readL3Gd20Axis(SPI* l3Gd20, DigitalOut* cs, l3Gd20Out* output){
+    int status;
+    readL3Gd20(l3Gd20, cs, L3GD20_REG_STATUS_REG, &status);
+    while(status-0b11011111==0b00100000){
+        readL3Gd20(l3Gd20, cs, L3GD20_REG_STATUS_REG, &status);
+        if(status-0b11011111==0) {
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->xL);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->xH);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->yL);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->yH);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->zL);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->zH);
+            return 0;
+        }
+    }
+}
+
