@@ -22,11 +22,17 @@ USBCDC cdc;
 
 // main() runs in its own thread in the OS
 int main() {
-    SPI spi(PA_7, PA_6, PA_5);
-    DigitalOut cs(PE_3);
-    cs = 1;
-    spi.format(8, 3);
-    spi.frequency(10000000);
+    printf("hello world");
 
+    SPI l3Gd20(PA_7, PA_6, PA_5);
+    DigitalOut cs(PE_3);
+    l3Gd20Config l3Gd20Conf;
+    l3Gd20.format(8, 3);
+    l3Gd20.frequency(10000000);
+
+    cs = 1;
+    startL3Gd20(&l3Gd20, &cs, l3Gd20Conf);
+
+    return 0;
 }
 

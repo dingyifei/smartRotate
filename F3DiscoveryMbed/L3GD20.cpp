@@ -35,7 +35,7 @@ int writeL3Gd20(SPI *l3Gd20, DigitalOut *cs, int reg, int data) {
     return 0;
 }
 
-int startL3Gd20(SPI *l3Gd20, DigitalOut *cs, l3Gd20StartupConfig startupConfig) {
+int startL3Gd20(SPI *l3Gd20, DigitalOut *cs, l3Gd20Config startupConfig) {
     writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG2, startupConfig.ctrlReg2);
     writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG3, startupConfig.ctrlReg3);
     writeL3Gd20(l3Gd20, cs, L3GD20_REG_CTRL_REG4, startupConfig.ctrlReg4);
@@ -53,17 +53,19 @@ int startL3Gd20(SPI *l3Gd20, DigitalOut *cs, l3Gd20StartupConfig startupConfig) 
     return 0;
 }
 int readL3Gd20Axis(SPI* l3Gd20, DigitalOut* cs, l3Gd20Out* output){
-    int status;
+    int status, l, h;
     readL3Gd20(l3Gd20, cs, L3GD20_REG_STATUS_REG, &status);
     while(status-0b11011111==0b00100000){
         readL3Gd20(l3Gd20, cs, L3GD20_REG_STATUS_REG, &status);
         if(status-0b11011111==0) {
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->xL);
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->xH);
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->yL);
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->yH);
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H, &output->zL);
-            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L, &output->zH);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H,&h);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L,&l);
+            //some processing
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H,&h);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L,&l);
+            //some more
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_H,&h);
+            readL3Gd20(l3Gd20, cs, L3GD20_REG_OUT_X_L,&l);
             return 0;
         }
     }

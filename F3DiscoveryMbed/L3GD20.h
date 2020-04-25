@@ -18,7 +18,7 @@ See the License for the specific language governing permissions and limitations 
 #define F3DISCOVERYMBED_L3GD20_H
 #include "mbed.h"
 #include "L3GD20_REG.h"
-struct l3Gd20StartupConfig{
+struct l3Gd20Config{
     int ctrlReg2 = 0b00000000;
     int ctrlReg3 = 0b00000000;
     int ctrlReg4 = 0b00000000;
@@ -35,15 +35,12 @@ struct l3Gd20StartupConfig{
     int ctrlReg1 = 0b00000111;
 };
 struct l3Gd20Out{
-    int xL;
-    int xH;
-    int yL;
-    int yH;
-    int zL;
-    int zH;
+    long x;
+    long y;
+    long z;
 };
 int readL3Gd20(SPI *, DigitalOut *, int, int *);
 int writeL3Gd20(SPI *, DigitalOut *, int, int);
-int startL3Gd20(SPI *, DigitalOut *, l3Gd20StartupConfig);
+int startL3Gd20(SPI *, DigitalOut *, l3Gd20Config);
 int readL3Gd20Axis(SPI *, DigitalOut*, l3Gd20Out*);
 #endif //F3DISCOVERYMBED_L3GD20_H
