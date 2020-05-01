@@ -26,11 +26,12 @@ int main() {
 
     SPI l3Gd20(PA_7, PA_6, PA_5);
     DigitalOut cs(PE_3);
-    l3Gd20Config l3Gd20Conf;
+    struct l3Gd20Config l3Gd20Conf;
     l3Gd20.format(8, 3);
     l3Gd20.frequency(10000000);
-
     cs = 1;
+
+    l3Gd20Conf.ctrlReg1 = 0b111111111;
     startL3Gd20(&l3Gd20, &cs, l3Gd20Conf);
 
     return 0;

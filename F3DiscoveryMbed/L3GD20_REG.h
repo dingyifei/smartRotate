@@ -46,6 +46,7 @@ See the License for the specific language governing permissions and limitations 
 
 #define L3GD20_REG_READ 0b10000000
 #define L3GD20_REG_WRITE 0b00000000
+#define L3GD20_REG_MULTIPLE_READ_WRITE 0b01000000
 
 #endif //F3DISCOVERYMBED_L3GD20_REG_H
 

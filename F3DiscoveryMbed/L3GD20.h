@@ -35,10 +35,21 @@ struct l3Gd20Config{
     int ctrlReg1 = 0b00000111;
 };
 struct l3Gd20Out{
-    long x;
-    long y;
-    long z;
+    int16_t x;
+    int16_t y;
+    int16_t z;
 };
+/*struct l3Gd20SPISend{
+    enum rw{
+        Read = 1,
+        Write = 0,
+    };
+    enum ms{
+        Multiple = 1,
+        Single = 0,
+    };
+    enum
+};*/
 int readL3Gd20(SPI *, DigitalOut *, int, int *);
 int writeL3Gd20(SPI *, DigitalOut *, int, int);
 int startL3Gd20(SPI *, DigitalOut *, l3Gd20Config);
