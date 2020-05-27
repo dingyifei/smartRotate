@@ -30,9 +30,11 @@ def win_apply_monitor_settings(monitor: win32api.PyDISPLAY_DEVICEType, settings:
     apply the DEVMODE to a known display
     :param monitor: a PyDISPLAY_DEVICEType object that have been confirmed to be a monitor
     :param settings: DEVMODE object
+    :return: return zero when it is successful
     """
     dm_size = 4  # private driver data following in the DEVMODE, not sure how to do it
-    win32api.ChangeDisplaySettingsEx(monitor.DeviceName, settings, dm_size, None, win32con.CDS_GLOBAL)
+    dwflags = win32con.CDS_RESET
+    return win32api.ChangeDisplaySettingsEx(monitor.DeviceName, settings, dwflags)
 
 
 def win_get_monitor_settings(monitor: win32api.PyDISPLAY_DEVICEType):
@@ -41,7 +43,7 @@ def win_get_monitor_settings(monitor: win32api.PyDISPLAY_DEVICEType):
     :param monitor: a DISPLAY_DEVICE object that have been confirmed to be a monitor
     :return: the DEVMODE object of the monitor object
     """
-    return win32api.EnumDisplaySettings(monitor.DeviceName)
+    return win32api.EnumDisplaySettingsEx(monitor.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
 
 def win_get_displays() -> list:
@@ -92,7 +94,7 @@ def win_change_orientation(monitor: win32api.PyDISPLAY_DEVICEType, orientation):
     """
     settings = win_get_monitor_settings(monitor)
     settings.DisplayOrientation = orientation
-    win_apply_monitor_settings(monitor, settings)
+    return win_apply_monitor_settings(monitor, settings)
 
 
 def main():
@@ -103,10 +105,8 @@ def main():
     display_list = win_get_displays()
     y = win_get_display_info(display_list[0])
     x = win_get_monitor_settings(display_list[0])
-    if win32con.DMDO_90 == x.DisplayOrientation:
-        print("yes")
-    print(x)
-
+    print(win_change_orientation(display_list[0], win32con.DMDO_270))
+    print("")
 
 if __name__ == "__main__":
     main()
