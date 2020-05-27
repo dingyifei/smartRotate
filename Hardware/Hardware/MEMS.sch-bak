@@ -13,16 +13,4 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Sheet
-S 2750 2300 500  2700
-U 5EF84708
-F0 "MEMS" 50
-F1 "MEMS.sch" 50
-$EndSheet
-$Sheet
-S 1600 2300 500  2700
-U 5EF5359A
-F0 "MCU" 50
-F1 "MCU.sch" 50
-$EndSheet
 $EndSCHEMATC
