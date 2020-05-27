@@ -1,5 +1,5 @@
 # smartRotate
- A display rotation software with hardware intergration
+ A display rotation software with hardware integration
 
 
 
@@ -13,3 +13,6 @@ it is the firmware for a F3Discovery Dev board written in C/C++ MBed. It allows 
 
 A python implementation of a software with GUI to automatically or manually adjust the orientation of the monitor.
 
+### ```Hardware```
+
+KiCad and other stuff for the hardware to be functional 
