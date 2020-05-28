@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 2
 Title ""
 Date ""
 Rev ""
@@ -14,15 +14,245 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Sheet
-S 2750 2300 500  2700
-U 5EF84708
-F0 "MEMS" 50
-F1 "MEMS.sch" 50
-$EndSheet
-$Sheet
-S 1600 2300 500  2700
+S 3950 3950 550  450 
 U 5EF5359A
 F0 "MCU" 50
 F1 "MCU.sch" 50
+F2 "SDA" I R 4500 4100 50 
+F3 "SCL" I R 4500 4250 50 
 $EndSheet
+$Comp
+L Device:C_Small C?
+U 1 1 5ED17446
+P 8000 4100
+AR Path="/5EF84708/5ED17446" Ref="C?"  Part="1" 
+AR Path="/5ED17446" Ref="C14"  Part="1" 
+F 0 "C14" H 8092 4146 50  0000 L CNN
+F 1 "100nF" H 8092 4055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8000 4100 50  0001 C CNN
+F 3 "~" H 8000 4100 50  0001 C CNN
+F 4 "C80516" H 8000 4100 50  0001 C CNN "LCSC"
+F 5 "0603B104K160CT" H 8000 4100 50  0001 C CNN "Part Number"
+	1    8000 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5ED1744C
+P 8400 4100
+AR Path="/5EF84708/5ED1744C" Ref="C?"  Part="1" 
+AR Path="/5ED1744C" Ref="C15"  Part="1" 
+F 0 "C15" H 8492 4146 50  0000 L CNN
+F 1 "100nF" H 8492 4055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8400 4100 50  0001 C CNN
+F 3 "~" H 8400 4100 50  0001 C CNN
+F 4 "C80516" H 8400 4100 50  0001 C CNN "LCSC"
+F 5 "0603B104K160CT" H 8400 4100 50  0001 C CNN "Part Number"
+	1    8400 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5ED2AB9E
+P 7250 4550
+AR Path="/5EB4B275/5ED2AB9E" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED2AB9E" Ref="#PWR?"  Part="1" 
+AR Path="/5ED2AB9E" Ref="#PWR0101"  Part="1" 
+F 0 "#PWR0101" H 7250 4400 50  0001 C CNN
+F 1 "+3.3V" V 7265 4678 50  0000 L CNN
+F 2 "" H 7250 4550 50  0001 C CNN
+F 3 "" H 7250 4550 50  0001 C CNN
+	1    7250 4550
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5ED309CF
+P 7250 3550
+AR Path="/5EB4B275/5ED309CF" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED309CF" Ref="#PWR?"  Part="1" 
+AR Path="/5ED309CF" Ref="#PWR0102"  Part="1" 
+F 0 "#PWR0102" H 7250 3300 50  0001 C CNN
+F 1 "GND" H 7255 3377 50  0000 C CNN
+F 2 "" H 7250 3550 50  0001 C CNN
+F 3 "" H 7250 3550 50  0001 C CNN
+	1    7250 3550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5ED36806
+P 7250 4150
+AR Path="/5EB4B275/5ED36806" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED36806" Ref="#PWR?"  Part="1" 
+AR Path="/5ED36806" Ref="#PWR0103"  Part="1" 
+F 0 "#PWR0103" H 7250 4000 50  0001 C CNN
+F 1 "+3.3V" V 7265 4278 50  0000 L CNN
+F 2 "" H 7250 4150 50  0001 C CNN
+F 3 "" H 7250 4150 50  0001 C CNN
+	1    7250 4150
+	0    1    1    0   
+$EndComp
+NoConn ~ 6350 4050
+NoConn ~ 6350 3950
+$Comp
+L smartRotate:BMA253 U4
+U 1 1 5ECF17B8
+P 6800 4050
+F 0 "U4" H 6800 4731 50  0000 C CNN
+F 1 "BMA253" H 6800 4640 50  0000 C CNN
+F 2 "Package_LGA:LGA-12_2x2mm_P0.5mm" H 6750 3500 50  0001 C CNN
+F 3 "https://www.bosch-sensortec.com/products/motion-sensors/accelerometers/bma253.html" H 7200 4100 50  0001 C CNN
+	1    6800 4050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6850 3550 6750 3550
+Connection ~ 6850 3550
+Wire Wire Line
+	6750 4550 6850 4550
+Connection ~ 6850 4550
+$Comp
+L power:GND #PWR?
+U 1 1 5ECF6B27
+P 7250 3950
+AR Path="/5EB4B275/5ECF6B27" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ECF6B27" Ref="#PWR?"  Part="1" 
+AR Path="/5ECF6B27" Ref="#PWR0104"  Part="1" 
+F 0 "#PWR0104" H 7250 3700 50  0001 C CNN
+F 1 "GND" H 7255 3777 50  0000 C CNN
+F 2 "" H 7250 3950 50  0001 C CNN
+F 3 "" H 7250 3950 50  0001 C CNN
+	1    7250 3950
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6850 3550 7250 3550
+Wire Wire Line
+	6850 4550 7250 4550
+$Comp
+L power:GND #PWR?
+U 1 1 5ECF7866
+P 6350 4250
+AR Path="/5EB4B275/5ECF7866" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ECF7866" Ref="#PWR?"  Part="1" 
+AR Path="/5ECF7866" Ref="#PWR0105"  Part="1" 
+F 0 "#PWR0105" H 6350 4000 50  0001 C CNN
+F 1 "GND" H 6355 4077 50  0000 C CNN
+F 2 "" H 6350 4250 50  0001 C CNN
+F 3 "" H 6350 4250 50  0001 C CNN
+	1    6350 4250
+	0    1    1    0   
+$EndComp
+NoConn ~ 7250 4050
+Text Label 6350 4150 2    50   ~ 0
+SDA
+Text Label 7250 4250 0    50   ~ 0
+SCL
+Text Label 5100 4100 0    50   ~ 0
+SDA
+Text Label 5100 4250 0    50   ~ 0
+SCL
+$Comp
+L Device:R_Small R11
+U 1 1 5ED8AEE3
+P 5000 3800
+F 0 "R11" H 5059 3846 50  0000 L CNN
+F 1 "R_Small" H 5059 3755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 5000 3800 50  0001 C CNN
+F 3 "~" H 5000 3800 50  0001 C CNN
+	1    5000 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4500 4250 4600 4250
+Wire Wire Line
+	5100 4100 5000 4100
+Connection ~ 4600 4250
+Wire Wire Line
+	4600 4250 5100 4250
+Wire Wire Line
+	5000 4100 5000 3900
+Connection ~ 5000 4100
+Wire Wire Line
+	5000 4100 4500 4100
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5ED8CE80
+P 5000 3700
+AR Path="/5EB4B275/5ED8CE80" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED8CE80" Ref="#PWR?"  Part="1" 
+AR Path="/5ED8CE80" Ref="#PWR0106"  Part="1" 
+F 0 "#PWR0106" H 5000 3550 50  0001 C CNN
+F 1 "+3.3V" V 5015 3828 50  0000 L CNN
+F 2 "" H 5000 3700 50  0001 C CNN
+F 3 "" H 5000 3700 50  0001 C CNN
+	1    5000 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5ED8C8EC
+P 4600 3700
+AR Path="/5EB4B275/5ED8C8EC" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED8C8EC" Ref="#PWR?"  Part="1" 
+AR Path="/5ED8C8EC" Ref="#PWR0107"  Part="1" 
+F 0 "#PWR0107" H 4600 3550 50  0001 C CNN
+F 1 "+3.3V" V 4615 3828 50  0000 L CNN
+F 2 "" H 4600 3700 50  0001 C CNN
+F 3 "" H 4600 3700 50  0001 C CNN
+	1    4600 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4600 3900 4600 4250
+$Comp
+L Device:R_Small R10
+U 1 1 5ED88F10
+P 4600 3800
+F 0 "R10" H 4659 3846 50  0000 L CNN
+F 1 "R_Small" H 4659 3755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 4600 3800 50  0001 C CNN
+F 3 "~" H 4600 3800 50  0001 C CNN
+	1    4600 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5ED95DAC
+P 8000 3800
+AR Path="/5EB4B275/5ED95DAC" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED95DAC" Ref="#PWR?"  Part="1" 
+AR Path="/5ED95DAC" Ref="#PWR0108"  Part="1" 
+F 0 "#PWR0108" H 8000 3650 50  0001 C CNN
+F 1 "+3.3V" V 8015 3928 50  0000 L CNN
+F 2 "" H 8000 3800 50  0001 C CNN
+F 3 "" H 8000 3800 50  0001 C CNN
+	1    8000 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5ED9647B
+P 8000 4400
+AR Path="/5EB4B275/5ED9647B" Ref="#PWR?"  Part="1" 
+AR Path="/5EF5359A/5ED9647B" Ref="#PWR?"  Part="1" 
+AR Path="/5ED9647B" Ref="#PWR0109"  Part="1" 
+F 0 "#PWR0109" H 8000 4150 50  0001 C CNN
+F 1 "GND" H 8005 4227 50  0000 C CNN
+F 2 "" H 8000 4400 50  0001 C CNN
+F 3 "" H 8000 4400 50  0001 C CNN
+	1    8000 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8000 3800 8000 4000
+Wire Wire Line
+	8000 4000 8400 4000
+Connection ~ 8000 4000
+Wire Wire Line
+	8400 4200 8000 4200
+Wire Wire Line
+	8000 4200 8000 4400
+Connection ~ 8000 4200
 $EndSCHEMATC
