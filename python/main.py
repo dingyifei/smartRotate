@@ -57,7 +57,7 @@ def main():
     label_z_rotation.grid(column=0, row=2, sticky=W)
     label_orientation = Label(main_frame, text="Orientation:")
     label_orientation.grid(column=0, row=3, sticky=W)
-    menubutton_display = Menubutton(main_frame, text="Displays")
+    menubutton_display = Listbox(main_frame)
     menubutton_display.grid(column=0, row=4, sticky=W, columnspan=2)
 
     label_x_reading = Label(main_frame, textvariable=x_rotation)

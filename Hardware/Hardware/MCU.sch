@@ -14,11 +14,11 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Wire Wire Line
-	8800 5900 8900 5900
-Connection ~ 8900 5900
-Connection ~ 9000 5900
+	7250 5200 7350 5200
+Connection ~ 7350 5200
+Connection ~ 7450 5200
 Wire Wire Line
-	9000 5900 9100 5900
+	7450 5200 7550 5200
 Wire Wire Line
 	3600 6550 3600 6400
 Wire Wire Line
@@ -139,26 +139,26 @@ $EndComp
 $Comp
 L MCU_ST_STM32F3:STM32F303CCTx U?
 U 1 1 5ECEE971
-P 9000 4400
+P 7450 3700
 AR Path="/5ECEE971" Ref="U?"  Part="1" 
 AR Path="/5E1424B2/5ECEE971" Ref="U?"  Part="1" 
 AR Path="/5EB4B275/5ECEE971" Ref="U?"  Part="1" 
 AR Path="/5EF5359A/5ECEE971" Ref="U3"  Part="1" 
-F 0 "U3" H 8950 2811 50  0000 C CNN
-F 1 "STM32F303CCT6" H 8950 2700 50  0000 C CNN
-F 2 "Package_QFP:LQFP-48_7x7mm_P0.5mm" H 8400 3000 50  0001 R CNN
-F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00058181.pdf" H 9000 4400 50  0001 C CNN
-F 4 "STM32F303CCT6" H 9000 4400 50  0001 C CNN "Part Number"
-F 5 "C81523" H 9000 4400 50  0001 C CNN "LCSC"
-	1    9000 4400
+F 0 "U3" H 7400 2111 50  0000 C CNN
+F 1 "STM32F303CCT6" H 7400 2000 50  0000 C CNN
+F 2 "Package_QFP:LQFP-48_7x7mm_P0.5mm" H 6850 2300 50  0001 R CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00058181.pdf" H 7450 3700 50  0001 C CNN
+F 4 "STM32F303CCT6" H 7450 3700 50  0001 C CNN "Part Number"
+F 5 "C81523" H 7450 3700 50  0001 C CNN "LCSC"
+	1    7450 3700
 	1    0    0    -1  
 $EndComp
 Connection ~ 4600 6400
 Connection ~ 3600 6400
 Wire Wire Line
-	8900 5900 9000 5900
-Connection ~ 9100 5900
-Text Label 8300 3500 2    50   ~ 0
+	7350 5200 7450 5200
+Connection ~ 7550 5200
+Text Label 6750 2800 2    50   ~ 0
 OSC_IN
 Text Label 1950 3350 0    50   ~ 0
 OSC_OUT
@@ -167,16 +167,16 @@ Wire Wire Line
 Text Notes 3400 7250 0    50   ~ 0
 Decoupeling Capacitor
 Wire Wire Line
-	8800 2900 8900 2900
-Connection ~ 8900 2900
+	7250 2200 7350 2200
+Connection ~ 7350 2200
 Wire Wire Line
-	8900 2900 9000 2900
-Connection ~ 9000 2900
+	7350 2200 7450 2200
+Connection ~ 7450 2200
 Wire Wire Line
-	9000 2900 9100 2900
-Connection ~ 9100 2900
+	7450 2200 7550 2200
+Connection ~ 7550 2200
 Wire Wire Line
-	9100 2900 9200 2900
+	7550 2200 7650 2200
 $Comp
 L Device:C C?
 U 1 1 5EF81A26
@@ -290,9 +290,9 @@ Connection ~ 2300 5000
 Wire Wire Line
 	2100 4650 2300 4650
 Connection ~ 2300 4650
-Text Label 10500 4950 1    50   ~ 0
+Text Label 2950 2950 2    50   ~ 0
 USB_D+
-Text Label 10200 4950 1    50   ~ 0
+Text Label 2950 3250 2    50   ~ 0
 USB_D-
 Text Label 4250 5300 1    50   ~ 0
 USB_D+
@@ -409,45 +409,45 @@ $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5ECEE96E
-P 9950 5900
+P 8400 5200
 AR Path="/5EB4B275/5ECEE96E" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5ECEE96E" Ref="#PWR018"  Part="1" 
-F 0 "#PWR018" H 9950 5650 50  0001 C CNN
-F 1 "GND" H 9955 5727 50  0000 C CNN
-F 2 "" H 9950 5900 50  0001 C CNN
-F 3 "" H 9950 5900 50  0001 C CNN
-	1    9950 5900
+F 0 "#PWR018" H 8400 4950 50  0001 C CNN
+F 1 "GND" H 8405 5027 50  0000 C CNN
+F 2 "" H 8400 5200 50  0001 C CNN
+F 3 "" H 8400 5200 50  0001 C CNN
+	1    8400 5200
 	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R?
 U 1 1 5EF819D2
-P 10200 5100
+P 3100 3250
 AR Path="/5EB4B275/5EF819D2" Ref="R?"  Part="1" 
 AR Path="/5EF5359A/5EF819D2" Ref="R6"  Part="1" 
-F 0 "R6" V 9993 5100 50  0000 C CNN
-F 1 "22" V 10084 5100 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 10130 5100 50  0001 C CNN
-F 3 "~" H 10200 5100 50  0001 C CNN
-F 4 "C100876" H 10200 5100 50  0001 C CNN "LCSC"
-F 5 "CR0603FA22R0G" H 10200 5100 50  0001 C CNN "Part Number"
-	1    10200 5100
-	1    0    0    -1  
+F 0 "R6" V 2893 3250 50  0000 C CNN
+F 1 "22" V 2984 3250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3030 3250 50  0001 C CNN
+F 3 "~" H 3100 3250 50  0001 C CNN
+F 4 "C100876" H 3100 3250 50  0001 C CNN "LCSC"
+F 5 "CR0603FA22R0G" H 3100 3250 50  0001 C CNN "Part Number"
+	1    3100 3250
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R?
 U 1 1 5EF819DA
-P 10500 5100
+P 3100 2950
 AR Path="/5EB4B275/5EF819DA" Ref="R?"  Part="1" 
 AR Path="/5EF5359A/5EF819DA" Ref="R8"  Part="1" 
-F 0 "R8" V 10293 5100 50  0000 C CNN
-F 1 "22" V 10384 5100 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 10430 5100 50  0001 C CNN
-F 3 "~" H 10500 5100 50  0001 C CNN
-F 4 "C100876" H 10500 5100 50  0001 C CNN "LCSC"
-F 5 "CR0603FA22R0G" H 10500 5100 50  0001 C CNN "Part Number"
-	1    10500 5100
-	1    0    0    -1  
+F 0 "R8" V 2893 2950 50  0000 C CNN
+F 1 "22" V 2984 2950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3030 2950 50  0001 C CNN
+F 3 "~" H 3100 2950 50  0001 C CNN
+F 4 "C100876" H 3100 2950 50  0001 C CNN "LCSC"
+F 5 "CR0603FA22R0G" H 3100 2950 50  0001 C CNN "Part Number"
+	1    3100 2950
+	0    -1   -1   0   
 $EndComp
 $Comp
 L power:GND #PWR?
@@ -492,7 +492,7 @@ F 5 "CC0603GRNPO9BN100" H 1150 3050 50  0001 C CNN "Part Number"
 	1    1150 3050
 	0    -1   -1   0   
 $EndComp
-Text Label 8300 3600 2    50   ~ 0
+Text Label 6750 2900 2    50   ~ 0
 OSC_OUT
 Text Label 1950 3050 0    50   ~ 0
 OSC_IN
@@ -515,7 +515,7 @@ Text Notes 650  2750 0    50   ~ 0
 Oscillators
 Text Notes 3400 7250 0    50   ~ 0
 Decoupeling Capacitor
-Text Label 8300 3300 2    50   ~ 0
+Text Label 6750 2600 2    50   ~ 0
 BOOT0
 Text Label 1350 4150 1    50   ~ 0
 NRST
@@ -549,63 +549,63 @@ F 3 "" H 1900 3200 50  0001 C CNN
 	1    1900 3200
 	0    -1   -1   0   
 $EndComp
-Text Label 8300 4200 2    50   ~ 0
+Text Label 6750 3500 2    50   ~ 0
 PB0
-Text Label 8300 3800 2    50   ~ 0
+Text Label 6750 3100 2    50   ~ 0
 PC13
-Text Label 9600 4500 0    50   ~ 0
+Text Label 8050 3800 0    50   ~ 0
 PA3
-Text Label 9600 4600 0    50   ~ 0
+Text Label 8050 3900 0    50   ~ 0
 PA4
-Text Label 9600 4700 0    50   ~ 0
+Text Label 8050 4000 0    50   ~ 0
 PA5
-Text Label 9600 4800 0    50   ~ 0
+Text Label 8050 4100 0    50   ~ 0
 PA6
-Text Label 9600 4900 0    50   ~ 0
+Text Label 8050 4200 0    50   ~ 0
 PA7
-Text Label 9600 5100 0    50   ~ 0
+Text Label 8050 4400 0    50   ~ 0
 PA9
-Text Label 9600 5200 0    50   ~ 0
+Text Label 8050 4500 0    50   ~ 0
 PA10
-Text Label 9600 5500 0    50   ~ 0
+Text Label 8050 4800 0    50   ~ 0
 PA13
-Text Label 8300 4800 2    50   ~ 0
+Text Label 6750 4100 2    50   ~ 0
 PB6
-Text Label 8300 4900 2    50   ~ 0
+Text Label 6750 4200 2    50   ~ 0
 PB7
-Text Label 8300 5100 2    50   ~ 0
+Text Label 6750 4400 2    50   ~ 0
 PB9
-Text Label 8300 5200 2    50   ~ 0
+Text Label 6750 4500 2    50   ~ 0
 PB10
-Text Label 8300 5300 2    50   ~ 0
+Text Label 6750 4600 2    50   ~ 0
 PB11
-Text Label 8300 5400 2    50   ~ 0
+Text Label 6750 4700 2    50   ~ 0
 PB12
-Text Label 8300 5500 2    50   ~ 0
+Text Label 6750 4800 2    50   ~ 0
 PB13
-Text Label 8300 5600 2    50   ~ 0
+Text Label 6750 4900 2    50   ~ 0
 PB14
-Text Label 8300 5700 2    50   ~ 0
+Text Label 6750 5000 2    50   ~ 0
 PB15
-Text Label 9600 4400 0    50   ~ 0
+Text Label 8050 3700 0    50   ~ 0
 PA2
-Text Label 9600 4300 0    50   ~ 0
+Text Label 8050 3600 0    50   ~ 0
 PA1
-Text Label 9600 4200 0    50   ~ 0
+Text Label 8050 3500 0    50   ~ 0
 PA0
-Text Label 8300 4700 2    50   ~ 0
+Text Label 6750 4000 2    50   ~ 0
 PB5
-Text Label 8300 4600 2    50   ~ 0
+Text Label 6750 3900 2    50   ~ 0
 PB4
-Text Label 8300 4500 2    50   ~ 0
+Text Label 6750 3800 2    50   ~ 0
 PB3
-Text Label 8300 4400 2    50   ~ 0
+Text Label 6750 3700 2    50   ~ 0
 PB2
-Text Label 8300 4300 2    50   ~ 0
+Text Label 6750 3600 2    50   ~ 0
 PB1
-Text Label 8300 4000 2    50   ~ 0
+Text Label 6750 3300 2    50   ~ 0
 PC15
-Text Label 8300 3900 2    50   ~ 0
+Text Label 6750 3200 2    50   ~ 0
 PC14
 $Comp
 L Device:CP C?
@@ -828,21 +828,21 @@ $EndComp
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5ECEE96C
-P 9950 2900
+P 8400 2200
 AR Path="/5EB4B275/5ECEE96C" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5ECEE96C" Ref="#PWR07"  Part="1" 
-F 0 "#PWR07" H 9950 2750 50  0001 C CNN
-F 1 "+3.3V" H 9965 3073 50  0000 C CNN
-F 2 "" H 9950 2900 50  0001 C CNN
-F 3 "" H 9950 2900 50  0001 C CNN
-	1    9950 2900
+F 0 "#PWR07" H 8400 2050 50  0001 C CNN
+F 1 "+3.3V" H 8415 2373 50  0000 C CNN
+F 2 "" H 8400 2200 50  0001 C CNN
+F 3 "" H 8400 2200 50  0001 C CNN
+	1    8400 2200
 	0    1    1    0   
 $EndComp
-Text Label 9600 5000 0    50   ~ 0
+Text Label 8050 4300 0    50   ~ 0
 PA8
-Text Label 8300 3100 2    50   ~ 0
+Text Label 6750 2400 2    50   ~ 0
 NRST
-Text Label 8300 5000 2    50   ~ 0
+Text Label 6750 4300 2    50   ~ 0
 PB8
 $Comp
 L Device:R R?
@@ -863,46 +863,46 @@ $EndComp
 $Comp
 L Power_Protection:USBLC6-2SC6 U2
 U 1 1 5EDB329A
-P 2400 7000
+P 2450 6600
 AR Path="/5EDB329A" Ref="U2"  Part="1" 
 AR Path="/5EF5359A/5EDB329A" Ref="U2"  Part="1" 
-F 0 "U2" H 2400 7681 50  0000 C CNN
-F 1 "USBLC6-2SC6" H 2400 7590 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-6" H 1650 7400 50  0001 C CNN
-F 3 "http://www2.st.com/resource/en/datasheet/CD00050750.pdf" H 2600 7350 50  0001 C CNN
-F 4 "C7519" H 2400 7000 50  0001 C CNN "LCSC"
-F 5 "USBLC6-2SC6" H 2400 7000 50  0001 C CNN "Part Number"
-	1    2400 7000
+F 0 "U2" H 2450 7281 50  0000 C CNN
+F 1 "USBLC6-2SC6" H 2450 7190 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-6" H 1700 7000 50  0001 C CNN
+F 3 "http://www2.st.com/resource/en/datasheet/CD00050750.pdf" H 2650 6950 50  0001 C CNN
+F 4 "C7519" H 2450 6600 50  0001 C CNN "LCSC"
+F 5 "USBLC6-2SC6" H 2450 6600 50  0001 C CNN "Part Number"
+	1    2450 6600
 	0    1    1    0   
 $EndComp
-Text Label 2400 7400 3    50   ~ 0
+Text Label 2450 7000 3    50   ~ 0
 USB_D-
-Text Label 2400 6600 1    50   ~ 0
+Text Label 2450 6200 1    50   ~ 0
 USB_D+
 $Comp
 L power:+5V #PWR?
 U 1 1 5EDDF740
-P 2800 7450
+P 2850 7050
 AR Path="/5EB4B275/5EDDF740" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5EDDF740" Ref="#PWR010"  Part="1" 
-F 0 "#PWR010" H 2800 7300 50  0001 C CNN
-F 1 "+5V" V 2815 7578 50  0000 L CNN
-F 2 "" H 2800 7450 50  0001 C CNN
-F 3 "" H 2800 7450 50  0001 C CNN
-	1    2800 7450
+F 0 "#PWR010" H 2850 6900 50  0001 C CNN
+F 1 "+5V" V 2865 7178 50  0000 L CNN
+F 2 "" H 2850 7050 50  0001 C CNN
+F 3 "" H 2850 7050 50  0001 C CNN
+	1    2850 7050
 	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5EDE3F13
-P 2000 7450
+P 2050 7050
 AR Path="/5EB4B275/5EDE3F13" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5EDE3F13" Ref="#PWR013"  Part="1" 
-F 0 "#PWR013" H 2000 7200 50  0001 C CNN
-F 1 "GND" H 2005 7277 50  0000 C CNN
-F 2 "" H 2000 7450 50  0001 C CNN
-F 3 "" H 2000 7450 50  0001 C CNN
-	1    2000 7450
+F 0 "#PWR013" H 2050 6800 50  0001 C CNN
+F 1 "GND" H 2055 6877 50  0000 C CNN
+F 2 "" H 2050 7050 50  0001 C CNN
+F 3 "" H 2050 7050 50  0001 C CNN
+	1    2050 7050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -930,26 +930,18 @@ Connection ~ 1350 4350
 Wire Wire Line
 	1350 4350 1350 4450
 Wire Wire Line
-	9600 5300 10200 5300
+	2850 6600 2850 7050
 Wire Wire Line
-	10200 5300 10200 5250
+	7550 5200 8400 5200
 Wire Wire Line
-	10500 5250 10500 5400
-Wire Wire Line
-	10500 5400 9600 5400
-Wire Wire Line
-	2800 7000 2800 7450
-Wire Wire Line
-	9100 5900 9950 5900
-Wire Wire Line
-	9200 2900 9950 2900
-Connection ~ 9200 2900
-Text HLabel 9600 5600 2    50   Input ~ 0
+	7650 2200 8400 2200
+Connection ~ 7650 2200
+Text HLabel 8050 4900 2    50   Input ~ 0
 SDA
-Text HLabel 9600 5700 2    50   Input ~ 0
+Text HLabel 8050 5000 2    50   Input ~ 0
 SCL
 Wire Wire Line
-	2000 7000 2000 7450
+	2050 6600 2050 7050
 $Comp
 L Connector:USB_C_Receptacle_USB2.0 J1
 U 1 1 5ED0DFC0
@@ -972,75 +964,75 @@ NoConn ~ 1600 7250
 $Comp
 L Connector:TestPoint TP2
 U 1 1 5ED6DD09
-P 5550 5050
-F 0 "TP2" H 5492 5076 50  0000 R CNN
-F 1 "TestPoint" H 5492 5167 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 5750 5050 50  0001 C CNN
-F 3 "~" H 5750 5050 50  0001 C CNN
-	1    5550 5050
+P 1500 1150
+F 0 "TP2" H 1442 1176 50  0000 R CNN
+F 1 "TestPoint" H 1442 1267 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1700 1150 50  0001 C CNN
+F 3 "~" H 1700 1150 50  0001 C CNN
+	1    1500 1150
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint TP1
 U 1 1 5ED7281B
-P 5050 5050
-F 0 "TP1" H 4992 5076 50  0000 R CNN
-F 1 "TestPoint" H 4992 5167 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 5250 5050 50  0001 C CNN
-F 3 "~" H 5250 5050 50  0001 C CNN
-	1    5050 5050
+P 1000 1150
+F 0 "TP1" H 942 1176 50  0000 R CNN
+F 1 "TestPoint" H 942 1267 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1200 1150 50  0001 C CNN
+F 3 "~" H 1200 1150 50  0001 C CNN
+	1    1000 1150
 	1    0    0    -1  
 $EndComp
-Text Label 5550 5050 3    50   ~ 0
+Text Label 1500 1150 3    50   ~ 0
 USB_D-
-Text Label 5050 5050 3    50   ~ 0
+Text Label 1000 1150 3    50   ~ 0
 USB_D+
 $Comp
 L power:+5V #PWR?
 U 1 1 5EDD4944
-P 6050 5050
+P 2000 1150
 AR Path="/5EB4B275/5EDD4944" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5EDD4944" Ref="#PWR0110"  Part="1" 
-F 0 "#PWR0110" H 6050 4900 50  0001 C CNN
-F 1 "+5V" V 6065 5178 50  0000 L CNN
-F 2 "" H 6050 5050 50  0001 C CNN
-F 3 "" H 6050 5050 50  0001 C CNN
-	1    6050 5050
+F 0 "#PWR0110" H 2000 1000 50  0001 C CNN
+F 1 "+5V" V 2015 1278 50  0000 L CNN
+F 2 "" H 2000 1150 50  0001 C CNN
+F 3 "" H 2000 1150 50  0001 C CNN
+	1    2000 1150
 	-1   0    0    1   
 $EndComp
 $Comp
 L Connector:TestPoint TP3
 U 1 1 5EDD99B2
-P 6050 5050
-F 0 "TP3" H 5992 5076 50  0000 R CNN
-F 1 "TestPoint" H 5992 5167 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 6250 5050 50  0001 C CNN
-F 3 "~" H 6250 5050 50  0001 C CNN
-	1    6050 5050
+P 2000 1150
+F 0 "TP3" H 1942 1176 50  0000 R CNN
+F 1 "TestPoint" H 1942 1267 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 2200 1150 50  0001 C CNN
+F 3 "~" H 2200 1150 50  0001 C CNN
+	1    2000 1150
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint TP4
 U 1 1 5EDE2C66
-P 6550 5050
-F 0 "TP4" H 6492 5076 50  0000 R CNN
-F 1 "TestPoint" H 6492 5167 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 6750 5050 50  0001 C CNN
-F 3 "~" H 6750 5050 50  0001 C CNN
-	1    6550 5050
+P 1500 2200
+F 0 "TP4" H 1442 2226 50  0000 R CNN
+F 1 "TestPoint" H 1442 2317 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1700 2200 50  0001 C CNN
+F 3 "~" H 1700 2200 50  0001 C CNN
+	1    1500 2200
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5EDE92E7
-P 6550 5050
+P 1500 2200
 AR Path="/5EB4B275/5EDE92E7" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5EDE92E7" Ref="#PWR0111"  Part="1" 
-F 0 "#PWR0111" H 6550 4900 50  0001 C CNN
-F 1 "+3.3V" V 6565 5178 50  0000 L CNN
-F 2 "" H 6550 5050 50  0001 C CNN
-F 3 "" H 6550 5050 50  0001 C CNN
-	1    6550 5050
+F 0 "#PWR0111" H 1500 2050 50  0001 C CNN
+F 1 "+3.3V" V 1515 2328 50  0000 L CNN
+F 2 "" H 1500 2200 50  0001 C CNN
+F 3 "" H 1500 2200 50  0001 C CNN
+	1    1500 2200
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
@@ -1050,83 +1042,83 @@ Wire Wire Line
 $Comp
 L Connector:TestPoint TP5
 U 1 1 5EDFF71D
-P 5050 5650
-F 0 "TP5" H 4992 5676 50  0000 R CNN
-F 1 "TestPoint" H 4992 5767 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 5250 5650 50  0001 C CNN
-F 3 "~" H 5250 5650 50  0001 C CNN
-	1    5050 5650
+P 1000 1750
+F 0 "TP5" H 942 1776 50  0000 R CNN
+F 1 "TestPoint" H 942 1867 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1200 1750 50  0001 C CNN
+F 3 "~" H 1200 1750 50  0001 C CNN
+	1    1000 1750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint TP6
 U 1 1 5EDFF723
-P 5550 5650
-F 0 "TP6" H 5492 5676 50  0000 R CNN
-F 1 "TestPoint" H 5492 5767 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 5750 5650 50  0001 C CNN
-F 3 "~" H 5750 5650 50  0001 C CNN
-	1    5550 5650
+P 1500 1750
+F 0 "TP6" H 1442 1776 50  0000 R CNN
+F 1 "TestPoint" H 1442 1867 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1700 1750 50  0001 C CNN
+F 3 "~" H 1700 1750 50  0001 C CNN
+	1    1500 1750
 	1    0    0    -1  
 $EndComp
-Text Label 5050 5650 3    50   ~ 0
+Text Label 1000 1750 3    50   ~ 0
 NRST
-Text Label 5550 5650 3    50   ~ 0
+Text Label 1500 1750 3    50   ~ 0
 BOOT0
 $Comp
 L power:GND #PWR?
 U 1 1 5EE50511
-P 6050 5650
+P 2000 1750
 AR Path="/5EB4B275/5EE50511" Ref="#PWR?"  Part="1" 
 AR Path="/5EF5359A/5EE50511" Ref="#PWR0112"  Part="1" 
-F 0 "#PWR0112" H 6050 5400 50  0001 C CNN
-F 1 "GND" H 6055 5477 50  0000 C CNN
-F 2 "" H 6050 5650 50  0001 C CNN
-F 3 "" H 6050 5650 50  0001 C CNN
-	1    6050 5650
+F 0 "#PWR0112" H 2000 1500 50  0001 C CNN
+F 1 "GND" H 2005 1577 50  0000 C CNN
+F 2 "" H 2000 1750 50  0001 C CNN
+F 3 "" H 2000 1750 50  0001 C CNN
+	1    2000 1750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint TP7
 U 1 1 5EE56F7D
-P 6050 5650
-F 0 "TP7" H 5992 5676 50  0000 R CNN
-F 1 "TestPoint" H 5992 5767 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 6250 5650 50  0001 C CNN
-F 3 "~" H 6250 5650 50  0001 C CNN
-	1    6050 5650
+P 2000 1750
+F 0 "TP7" H 1942 1776 50  0000 R CNN
+F 1 "TestPoint" H 1942 1867 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 2200 1750 50  0001 C CNN
+F 3 "~" H 2200 1750 50  0001 C CNN
+	1    2000 1750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint TP8
 U 1 1 5EE56F83
-P 6550 5650
-F 0 "TP8" H 6492 5676 50  0000 R CNN
-F 1 "TestPoint" H 6492 5767 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 6750 5650 50  0001 C CNN
-F 3 "~" H 6750 5650 50  0001 C CNN
-	1    6550 5650
+P 2000 2200
+F 0 "TP8" H 1942 2226 50  0000 R CNN
+F 1 "TestPoint" H 1942 2317 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 2200 2200 50  0001 C CNN
+F 3 "~" H 2200 2200 50  0001 C CNN
+	1    2000 2200
 	1    0    0    -1  
 $EndComp
-Text HLabel 7050 5650 3    50   Input ~ 0
+Text HLabel 1000 2200 3    50   Input ~ 0
 SDA
-Text HLabel 6550 5650 3    50   Input ~ 0
+Text HLabel 2000 2200 3    50   Input ~ 0
 SCL
 $Comp
 L Connector:TestPoint TP9
 U 1 1 5EE6CED7
-P 7050 5650
-F 0 "TP9" H 6992 5676 50  0000 R CNN
-F 1 "TestPoint" H 6992 5767 50  0000 R CNN
-F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 7250 5650 50  0001 C CNN
-F 3 "~" H 7250 5650 50  0001 C CNN
-	1    7050 5650
+P 1000 2200
+F 0 "TP9" H 942 2226 50  0000 R CNN
+F 1 "TestPoint" H 942 2317 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 1200 2200 50  0001 C CNN
+F 3 "~" H 1200 2200 50  0001 C CNN
+	1    1000 2200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2500 6600 2300 6600
+	2550 6200 2350 6200
 Wire Wire Line
-	2500 7400 2300 7400
+	2550 7000 2350 7000
 Wire Wire Line
 	700  7550 850  7550
 Connection ~ 850  7550
@@ -1222,4 +1214,12 @@ Wire Notes Line
 	4500 4900 3250 4900
 Wire Notes Line
 	3250 4900 3250 5950
+Text Label 3250 2950 0    50   ~ 0
+D+
+Text Label 3250 3250 0    50   ~ 0
+D-
+Text Label 8050 4600 0    50   ~ 0
+D-
+Text Label 8050 4700 0    50   ~ 0
+D+
 $EndSCHEMATC
