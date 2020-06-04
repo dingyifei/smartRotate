@@ -2468,7 +2468,7 @@ ADD_EXECUTABLE(F3DiscoveryMbed
   mbed-os/targets/TARGET_STM/watchdog_api.c
   mbed_config.h
   mbed_config.h
-        L3GD20_REG.h L3GD20.cpp L3GD20.h)
+        L3GD20_REG.h L3GD20.cpp L3GD20.h LSM303DLHC.cpp LSM303DLHC.h)
 SET_TARGET_PROPERTIES(F3DiscoveryMbed PROPERTIES ENABLE_EXPORTS 1)
 # add syslibs dependencies to create the correct linker order
 TARGET_LINK_LIBRARIES(F3DiscoveryMbed -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys)
