@@ -25,7 +25,7 @@ int main() {
     printf("hello world");
 
     lsm303Dlhc LSM303(PB_7, PB_6);
-    LSM303.config.CTRL_REG1_A = 0b01010111;
+    LSM303.config.CTRL_REG1_A = 0b00100111;
     LSM303.config.CTRL_REG4_A = 0b00000000;
     LSM303.writeConfig();
     while(true){
