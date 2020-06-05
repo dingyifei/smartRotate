@@ -22,16 +22,20 @@ See the License for the specific language governing permissions and limitations 
 // main() runs in its own thread in the OS
 int main() {
     int acc[3], adj[3];
-    printf("hello world");
+    printf("hello world\n");
 
     lsm303Dlhc LSM303(PB_7, PB_6);
     LSM303.config.CTRL_REG1_A = 0b00100111;
-    LSM303.config.CTRL_REG4_A = 0b00000000;
+    LSM303.config.CTRL_REG4_A = 0b00110000;
     LSM303.writeConfig();
     ThisThread::sleep_for(100);
-    LSM303.readAccAxes(acc);
+    LSM303.readAccAxes(adj);
+    printf("X:%d\nY:%d\nZ:%d\n", adj[0], adj[1],adj[2]);
 
-    printf("X:%d\nY:%d\nZ:%d\n", acc[0], acc[1],acc[2]);
+
+    ThisThread::sleep_for(500);
+    LSM303.readAccAxes(acc);
+    printf("X:%d\nY:%d\nZ:%d\n", acc[0]-adj[0], acc[1]-adj[1],acc[2]-adj[2]);
     ThisThread::sleep_for(100);
 }
 

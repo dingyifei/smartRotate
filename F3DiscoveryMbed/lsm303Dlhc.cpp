@@ -57,17 +57,17 @@ void lsm303Dlhc::read(regAddr addr, char *data, int length) {
 void lsm303Dlhc::readAccAxes(int axes[]) {
     char data[6];
     read(OUT_X_L_A, data, 6);
-    axes[0] = (int) (data[1] << 8) + data[0];
-    axes[1] = (int) (data[3] << 8) + data[2];
-    axes[2] = (int) (data[5] << 8) + data[4];
+    axes[0] = (int) (data[1] << 8) | data[0];
+    axes[1] = (int) (data[3] << 8) | data[2];
+    axes[2] = (int) (data[5] << 8) | data[4];
 }
 
 void lsm303Dlhc::readMagAxes(int axes[]) {
     char data[6];
     read(OUT_X_L_M, data, 6);
-    axes[0] = (int) (data[1] << 8) + data[0];
-    axes[1] = (int) (data[3] << 8) + data[2];
-    axes[2] = (int) (data[5] << 8) + data[4];
+    axes[0] = (int) (data[1] << 8) | data[0];
+    axes[1] = (int) (data[3] << 8) | data[2];
+    axes[2] = (int) (data[5] << 8) | data[4];
 }
 
 void lsm303Dlhc::writeConfig() {
