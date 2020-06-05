@@ -14,18 +14,24 @@ either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 */
 #include "mbed.h"
-#include "USBCDC.h"
+//#include "USBCDC.h"
 #include "lsm303Dlhc.h"
 
-USBCDC cdc;
+//USBCDC cdc;
 
 // main() runs in its own thread in the OS
 int main() {
+    int acc[3];
     printf("hello world");
 
     lsm303Dlhc LSM303(PB_7, PB_6);
-
-
-    return 0;
+    LSM303.config.CTRL_REG1_A = 0b01010111;
+    LSM303.config.CTRL_REG4_A = 0b00000000;
+    LSM303.writeConfig();
+    while(true){
+        LSM303.readAccAxes(acc);
+        printf("X:%d\nY:%d\nZ:%d\n", acc[0], acc[1],acc[2]);
+        ThisThread::sleep_for(100);
+    }
 }
 

@@ -63,35 +63,34 @@ enum regAddr {
     IRA_REG_M = 0x0A,
     IRB_REG_M = 0x0B,
     IRC_REG_M = 0x0C
-} reg;
-
+};
 
 
 class lsm303Dlhc {
     struct configuration {
-        int CTRL_REG1_A =0b00000111;
-        int CTRL_REG2_A =0b00000000;
-        int CTRL_REG3_A =0b00000000;
-        int CTRL_REG4_A =0b00000000;
-        int CTRL_REG5_A =0b00000000;
-        int CTRL_REG6_A =0b00000000;
-        int REFERENCE_A =0b00000000;
-        int FIFO_CTRL_REG_A =0b00000000;
-        int INT1_CFG_A =0b00000000;
-        int INT1_THS_A =0b00000000;
-        int INT1_DURATION_A =0b00000000;
-        int INT2_CFG_A =0b00000000;
-        int INT2_THS_A =0b00000000;
-        int INT2_DURATION_A =0b00000000;
-        int CLICK_CFG_A =0b00000000;
-        int CLICK_SRC_A =0b00000000;
-        int CLICK_THS_A =0b00000000;
-        int TIME_LIMIT_A =0b00000000;
-        int TIME_LATENCY_A =0b00000000;
-        int TIME_WINDOW_A =0b00000000;
-        int CRA_REG_M =0b00010000;
-        int CRB_REG_M =0b00100000;
-        int MR_REG_M =0b00000011;
+        int CTRL_REG1_A = 0b00000111;
+        int CTRL_REG2_A = 0b00000000;
+        int CTRL_REG3_A = 0b00000000;
+        int CTRL_REG4_A = 0b00000000;
+        int CTRL_REG5_A = 0b00000000;
+        int CTRL_REG6_A = 0b00000000;
+        int REFERENCE_A = 0b00000000;
+        int FIFO_CTRL_REG_A = 0b00000000;
+        int INT1_CFG_A = 0b00000000;
+        int INT1_THS_A = 0b00000000;
+        int INT1_DURATION_A = 0b00000000;
+        int INT2_CFG_A = 0b00000000;
+        int INT2_THS_A = 0b00000000;
+        int INT2_DURATION_A = 0b00000000;
+        int CLICK_CFG_A = 0b00000000;
+        int CLICK_SRC_A = 0b00000000;
+        int CLICK_THS_A = 0b00000000;
+        int TIME_LIMIT_A = 0b00000000;
+        int TIME_LATENCY_A = 0b00000000;
+        int TIME_WINDOW_A = 0b00000000;
+        int CRA_REG_M = 0b00010000;
+        int CRB_REG_M = 0b00100000;
+        int MR_REG_M = 0b00000011;
     };
 public:
 
@@ -110,11 +109,11 @@ public:
     void readMagAxes(int axes[3]);
 
     struct configuration config;
-
+    I2C _i2c;
 private:
     int getDevAddr(regAddr addr) const;
 
-    I2C _i2c;
+
     int addressAcc;
     int addressMag;
 };

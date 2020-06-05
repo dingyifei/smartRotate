@@ -16,15 +16,16 @@ See the License for the specific language governing permissions and limitations 
 #include "mbed.h"
 #include "lsm303Dlhc.h"
 
-lsm303Dlhc::lsm303Dlhc(PinName sda, PinName scl, int accAddress, int magAddress) : _i2c(sda, scl){
-
+lsm303Dlhc::lsm303Dlhc(PinName sda, PinName scl, int accAddress, int magAddress) : _i2c(sda, scl) {
+    _i2c.frequency(100000);
     addressAcc = accAddress;
     addressMag = magAddress;
 }
 
-int lsm303Dlhc::getDevAddr(regAddr addr) const {
+
+int lsm303Dlhc::getDevAddr(regAddr addr) const{
     int devAddr;
-    if (addr <= 0x3D && addr >= 0x20) {
+    if ((addr <= 0x3D) && (addr >= 0x20)) {
         devAddr = addressAcc;
     } else {
         devAddr = addressMag;
@@ -32,9 +33,11 @@ int lsm303Dlhc::getDevAddr(regAddr addr) const {
     return devAddr;
 }
 
+
 void lsm303Dlhc::write(regAddr addr, char *data, int length) {
     char writeData[50];
-    writeData[0] = static_cast<char>((1u << 7u) + addr); //set MSB to 1 so it automatically increase address when writing
+    writeData[0] = static_cast<char>((1u << 7u) +
+                                     addr); //set MSB to 1 so it automatically increase address when writing
     memcpy(&writeData[1], data, static_cast<size_t>(length));
     _i2c.write(getDevAddr(addr), writeData, length + 1);
 }
@@ -92,6 +95,7 @@ void lsm303Dlhc::writeConfig() {
     write(CRB_REG_M, config.CRB_REG_M);
     write(MR_REG_M, config.MR_REG_M);
 }
+
 
 
 
