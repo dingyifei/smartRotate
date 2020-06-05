@@ -17,7 +17,6 @@ See the License for the specific language governing permissions and limitations 
 
 #ifndef F3DISCOVERYMBED_LSM303DLHC_H
 #define F3DISCOVERYMBED_LSM303DLHC_H
-
 enum regAddr {
 // read-write
     CTRL_REG1_A = 0x20,
@@ -64,27 +63,60 @@ enum regAddr {
     IRA_REG_M = 0x0A,
     IRB_REG_M = 0x0B,
     IRC_REG_M = 0x0C
-};
+} reg;
 
 
-class LSM303DLHC {
-    I2C *LSM303DLHC_i2c;
-    int LSM303DLHC_address_acc;
-    int LSM303DLHC_address_mag;
 
-private:
-    int getDevAddr(regAddr addr);
-
+class lsm303Dlhc {
+    struct configuration {
+        int CTRL_REG1_A =0b00000111;
+        int CTRL_REG2_A =0b00000000;
+        int CTRL_REG3_A =0b00000000;
+        int CTRL_REG4_A =0b00000000;
+        int CTRL_REG5_A =0b00000000;
+        int CTRL_REG6_A =0b00000000;
+        int REFERENCE_A =0b00000000;
+        int FIFO_CTRL_REG_A =0b00000000;
+        int INT1_CFG_A =0b00000000;
+        int INT1_THS_A =0b00000000;
+        int INT1_DURATION_A =0b00000000;
+        int INT2_CFG_A =0b00000000;
+        int INT2_THS_A =0b00000000;
+        int INT2_DURATION_A =0b00000000;
+        int CLICK_CFG_A =0b00000000;
+        int CLICK_SRC_A =0b00000000;
+        int CLICK_THS_A =0b00000000;
+        int TIME_LIMIT_A =0b00000000;
+        int TIME_LATENCY_A =0b00000000;
+        int TIME_WINDOW_A =0b00000000;
+        int CRA_REG_M =0b00010000;
+        int CRB_REG_M =0b00100000;
+        int MR_REG_M =0b00000011;
+    };
 public:
-    LSM303DLHC(I2C *interface, int accAddress = 0b00110010, int magAddress = 0b00111100);
+
+    lsm303Dlhc(PinName sda, PinName scl, int accAddress = 0b00110010, int magAddress = 0b00111100);
 
     void write(regAddr addr, char *data, int length);
 
+    void write(regAddr addr, int data);
+
     void read(regAddr addr, char data[], int length);
+
+    void writeConfig();
 
     void readAccAxes(int axes[3]);
 
     void readMagAxes(int axes[3]);
+
+    struct configuration config;
+
+private:
+    int getDevAddr(regAddr addr) const;
+
+    I2C _i2c;
+    int addressAcc;
+    int addressMag;
 };
 
 

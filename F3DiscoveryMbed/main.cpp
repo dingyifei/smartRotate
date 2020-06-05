@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and limitations 
 */
 #include "mbed.h"
 #include "USBCDC.h"
-
+#include "lsm303Dlhc.h"
 
 USBCDC cdc;
 
@@ -23,6 +23,7 @@ USBCDC cdc;
 int main() {
     printf("hello world");
 
+    lsm303Dlhc LSM303(PB_7, PB_6);
 
 
     return 0;
