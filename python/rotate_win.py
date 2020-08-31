@@ -21,9 +21,10 @@ import win32con
 
 # useful doc https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/
 
+
 class Monitor:
     """
-
+    A class to represent a monitor(an adapter to be exact)
     """
 
     def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType,
@@ -39,62 +40,67 @@ class Monitor:
         else:
             self.config = win32api.EnumDisplaySettingsEx(adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_device_string()
 
     def __eq__(self, other):
         """
-
-        :param other:
-        :return:
+        Compare two monitor object, return false when Device and Adapter doesn't match with the input
+        :param other: another monitor object
+        :return: true if they are the same (regardless of the config)
         """
         # TODO: compare two monitor
 
     def update_config(self):
         """
-
+        This function call win32 api to get the current config
         """
         self.config = win32api.EnumDisplaySettingsEx(self.adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
     def apply_config(self) -> int:
         """
-
-        :return:
+        apply the config changes to windows.
+        :return: successful when it return 0
         """
         return win32api.ChangeDisplaySettingsEx(self.adapter.DeviceName, self.config)
 
+    def replace_config(self, monitor):
+        """
+        replace the config of the current monitor object with a config from another monitor object
+        :param monitor:
+        """
+        self.config = monitor.config
+
     def get_device_id(self) -> str:
         """
-
+        return the DeviceID of the monitor
         :return:
         """
         return self.device.DeviceID
 
     def get_device_key(self) -> str:
         """
-
+        return the DeviceKey of the monitor
         :return:
         """
         return self.adapter.DeviceKey
 
     def get_device_string(self) -> str:
         """
-
+        return the DeviceString of the monitor
         :return:
         """
         return self.device.DeviceString
 
     def swap_pels(self):
         """
-
+        Swap the vertical and horizontal pixel count
         """
-        temp = self.config.PelsHeight
-        self.config.PelsHeight = self.config.PelsWidth
-        self.config.PelsWidth = temp
+        self.config.PelsHeight, self.config.PelsWidth = self.config.PelsWidth, self.config.PelsHeight
 
-    def rotation_0(self):
+    def rotation_default(self):
         """
-
+        Set rotation to 0 degree
         """
         if self.config.DisplayOrientation == win32con.DMDO_90 or \
                 self.config.DisplayOrientation == win32con.DMDO_270:
@@ -104,7 +110,7 @@ class Monitor:
 
     def rotation_90(self):
         """
-
+        Set monitor rotation to 90 degrees
         """
         if self.config.DisplayOrientation == win32con.DMDO_180 or \
                 self.config.DisplayOrientation == win32con.DMDO_DEFAULT:
@@ -114,7 +120,7 @@ class Monitor:
 
     def rotation_180(self):
         """
-
+        Set monitor rotation to 180 degrees
         """
         if self.config.DisplayOrientation == win32con.DMDO_90 or \
                 self.config.DisplayOrientation == win32con.DMDO_270:
@@ -124,7 +130,7 @@ class Monitor:
 
     def rotation_270(self):
         """
-
+        Set monitor rotation to 270 degrees
         """
         if self.config.DisplayOrientation == win32con.DMDO_180 or \
                 self.config.DisplayOrientation == win32con.DMDO_DEFAULT:
@@ -134,41 +140,37 @@ class Monitor:
 
     def rotate_cw(self):
         """
-
+        Rotate the monitor clock wise for 90 degrees
         """
-        self.swap_pels()
         current = self.config.DisplayOrientation
         if current == win32con.DMDO_DEFAULT:
-            self.config.DisplayOrientation = win32con.DMDO_270
+            self.rotation_270()
         elif current == win32con.DMDO_90:
-            self.config.DisplayOrientation = win32con.DMDO_DEFAULT
+            self.rotation_default()
         elif current == win32con.DMDO_180:
-            self.config.DisplayOrientation = win32con.DMDO_90
+            self.rotation_90()
         elif current == win32con.DMDO_270:
-            self.config.DisplayOrientation = win32con.DMDO_180
-        self.apply_config()
+            self.rotation_180()
 
     def rotate_ccw(self):
         """
-
+        Rotate the monitor counter-clock wise for 90 degrees
         """
-        self.swap_pels()
         current = self.config.DisplayOrientation
         if current == win32con.DMDO_DEFAULT:
-            self.config.DisplayOrientation = win32con.DMDO_90
+            self.rotation_90()
         elif current == win32con.DMDO_90:
-            self.config.DisplayOrientation = win32con.DMDO_180
+            self.rotation_180()
         elif current == win32con.DMDO_180:
-            self.config.DisplayOrientation = win32con.DMDO_270
+            self.rotation_270()
         elif current == win32con.DMDO_270:
-            self.config.DisplayOrientation = win32con.DMDO_DEFAULT
-        self.apply_config()
+            self.rotation_default()
 
 
-def get_monitors():
+def get_monitors() -> list:
     """
-
-    :return:
+    this function return a list of monitors recognize by the computer
+    :return: A list of Monitor objects
     """
     displays = []
     i = 0
@@ -193,48 +195,43 @@ def get_monitors():
 
 class Monitors:
     """
-
+    A class to represent all the monitors(adapters to be exact) that are detectable by windows.
     """
 
     def __init__(self):
         self.monitors = get_monitors()
 
-    def get_monitor_from_key(self, DeviceKey):
-        """
+    def __getitem__(self, item) -> Monitor:
+        return self.monitors[item]
 
+    def get_monitor_from_key(self, DeviceKey: str) -> Monitor:
+        """
+        find the monitor with the provided DeviceKey
         :param DeviceKey:
-        :return:
+        :return: the first monitor with the provided DeviceKey
         """
         for monitor in self.monitors:
             if monitor.get_device_key() == DeviceKey:
                 return monitor
         raise LookupError("%s Monitor does not exist" % DeviceKey)
 
-    def get_monitor_from_id(self, DeviceID):
+    def get_monitor_from_id(self, DeviceID: str) -> Monitor:
         """
-
+        find the monitor with the provided DeviceID
         :param DeviceID:
-        :return:
+        :return: the first monitor with the provided DeviceID
         """
         for monitor in self.monitors:
             if monitor.get_device_id() == DeviceID:
                 return monitor
         raise LookupError("%s Monitor does not exist" % DeviceID)
 
-    def overwrite_monitor(self, newMonitor: Monitor):
-        """
-
-        :param newMonitor:
-        """
-        # TODO:Write this function
-
 
 def main():
     """
         it's just for testing purposes
     """
-    a = Monitors()
-    a.monitors[0].rotation_0()
+    monitors = Monitors()
 
 
 if __name__ == "__main__":
