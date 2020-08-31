@@ -25,10 +25,30 @@ class Monitor:
     """
 
     """
-    def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType):
+
+    def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType,
+                 device: win32api.PyDISPLAY_DEVICEType = None,
+                 config: list = None):
         self.adapter = adapter
-        self.device = win32api.EnumDisplayDevices(adapter.DeviceName, 0)  # Device is just for readability
-        self.config = win32api.EnumDisplaySettingsEx(adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
+        if device is not None:
+            self.device = device
+        else:
+            self.device = win32api.EnumDisplayDevices(adapter.DeviceName, 0)  # Device is just for readability
+        if config is not None:
+            self.config = config
+        else:
+            self.config = win32api.EnumDisplaySettingsEx(adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
+
+    def __str__(self):
+        return self.get_device_string()
+
+    def __eq__(self, other):
+        """
+
+        :param other:
+        :return:
+        """
+        # TODO: compare two monitor
 
     def update_config(self):
         """
@@ -36,12 +56,33 @@ class Monitor:
         """
         self.config = win32api.EnumDisplaySettingsEx(self.adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
-    def apply_config(self):
+    def apply_config(self) -> int:
         """
 
         :return:
         """
         return win32api.ChangeDisplaySettingsEx(self.adapter.DeviceName, self.config)
+
+    def get_device_id(self) -> str:
+        """
+
+        :return:
+        """
+        return self.device.DeviceID
+
+    def get_device_key(self) -> str:
+        """
+
+        :return:
+        """
+        return self.adapter.DeviceKey
+
+    def get_device_string(self) -> str:
+        """
+
+        :return:
+        """
+        return self.device.DeviceString
 
     def swap_pels(self):
         """
@@ -154,25 +195,38 @@ class Monitors:
     """
 
     """
+
     def __init__(self):
         self.monitors = get_monitors()
 
-    def update_monitors(self):
-        """
-
-        """
-        self.monitors = get_monitors()
-
-    def get_monitor(self, DeviceKey):
+    def get_monitor_from_key(self, DeviceKey):
         """
 
         :param DeviceKey:
         :return:
         """
         for monitor in self.monitors:
-            if monitor.adapter.DeviceKey == DeviceKey:
+            if monitor.get_device_key() == DeviceKey:
                 return monitor
-        raise LookupError("Monitor doesn't exist")
+        raise LookupError("%s Monitor does not exist" % DeviceKey)
+
+    def get_monitor_from_id(self, DeviceID):
+        """
+
+        :param DeviceID:
+        :return:
+        """
+        for monitor in self.monitors:
+            if monitor.get_device_id() == DeviceID:
+                return monitor
+        raise LookupError("%s Monitor does not exist" % DeviceID)
+
+    def overwrite_monitor(self, newMonitor: Monitor):
+        """
+
+        :param newMonitor:
+        """
+        # TODO:Write this function
 
 
 def main():
