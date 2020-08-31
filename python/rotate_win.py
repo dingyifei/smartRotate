@@ -17,47 +17,85 @@ See the License for the specific language governing permissions and limitations 
 import pywintypes
 import win32api
 import win32con
-import xml
 
 
 # useful doc https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/
 
 class Monitor:
+    """
+
+    """
     def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType):
         self.adapter = adapter
-        self.device = win32api.EnumDisplayDevices(adapter.DeviceName, 0)#Device is just for readability
+        self.device = win32api.EnumDisplayDevices(adapter.DeviceName, 0)  # Device is just for readability
         self.config = win32api.EnumDisplaySettingsEx(adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
     def update_config(self):
+        """
+
+        """
         self.config = win32api.EnumDisplaySettingsEx(self.adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
-    def apply_config(self, dwflags=win32con.CDS_RESET):
-        dm_size = 4  # private driver data following in the DEVMODE
+    def apply_config(self):
+        """
+
+        :return:
+        """
         return win32api.ChangeDisplaySettingsEx(self.adapter.DeviceName, self.config)
 
-    def swapPels(self):
+    def swap_pels(self):
+        """
+
+        """
         temp = self.config.PelsHeight
         self.config.PelsHeight = self.config.PelsWidth
         self.config.PelsWidth = temp
 
     def rotation_0(self):
+        """
+
+        """
+        if self.config.DisplayOrientation == win32con.DMDO_90 or \
+                self.config.DisplayOrientation == win32con.DMDO_270:
+            self.swap_pels()
         self.config.DisplayOrientation = win32con.DMDO_DEFAULT
         self.apply_config()
 
     def rotation_90(self):
+        """
+
+        """
+        if self.config.DisplayOrientation == win32con.DMDO_180 or \
+                self.config.DisplayOrientation == win32con.DMDO_DEFAULT:
+            self.swap_pels()
         self.config.DisplayOrientation = win32con.DMDO_90
         self.apply_config()
 
     def rotation_180(self):
+        """
+
+        """
+        if self.config.DisplayOrientation == win32con.DMDO_90 or \
+                self.config.DisplayOrientation == win32con.DMDO_270:
+            self.swap_pels()
         self.config.DisplayOrientation = win32con.DMDO_180
         self.apply_config()
 
     def rotation_270(self):
+        """
+
+        """
+        if self.config.DisplayOrientation == win32con.DMDO_180 or \
+                self.config.DisplayOrientation == win32con.DMDO_DEFAULT:
+            self.swap_pels()
         self.config.DisplayOrientation = win32con.DMDO_270
         self.apply_config()
 
     def rotate_cw(self):
-        self.swapPels()
+        """
+
+        """
+        self.swap_pels()
         current = self.config.DisplayOrientation
         if current == win32con.DMDO_DEFAULT:
             self.config.DisplayOrientation = win32con.DMDO_270
@@ -70,6 +108,10 @@ class Monitor:
         self.apply_config()
 
     def rotate_ccw(self):
+        """
+
+        """
+        self.swap_pels()
         current = self.config.DisplayOrientation
         if current == win32con.DMDO_DEFAULT:
             self.config.DisplayOrientation = win32con.DMDO_90
@@ -82,35 +124,51 @@ class Monitor:
         self.apply_config()
 
 
-class Monitors():
-    def __get_monitors(self):
-        displays = []
-        i = 0
-        while True:
-            try:
-                display = win32api.EnumDisplayDevices(None, i)
-                displays.append(display)
-            except pywintypes.error:  # run out of displays
-                break
-            i += 1
+def get_monitors():
+    """
 
-        monitors = []
-        for display in displays:
-            try:
-                win32api.EnumDisplayDevices(display.DeviceName, 0)
-                monitors.append(Monitor(display))
-            except pywintypes.error:
-                continue
+    :return:
+    """
+    displays = []
+    i = 0
+    while True:
+        try:
+            display = win32api.EnumDisplayDevices(None, i)
+            displays.append(display)
+        except pywintypes.error:  # run out of displays
+            break
+        i += 1
 
-        return monitors
+    monitors = []
+    for display in displays:
+        try:
+            win32api.EnumDisplayDevices(display.DeviceName, 0)
+            monitors.append(Monitor(display))
+        except pywintypes.error:
+            continue
 
+    return monitors
+
+
+class Monitors:
+    """
+
+    """
     def __init__(self):
-        self.monitors = self.__get_monitors()
+        self.monitors = get_monitors()
 
     def update_monitors(self):
-        self.monitors = self.__get_monitors()
+        """
+
+        """
+        self.monitors = get_monitors()
 
     def get_monitor(self, DeviceKey):
+        """
+
+        :param DeviceKey:
+        :return:
+        """
         for monitor in self.monitors:
             if monitor.adapter.DeviceKey == DeviceKey:
                 return monitor
@@ -123,6 +181,7 @@ def main():
     """
     a = Monitors()
     a.monitors[0].rotation_0()
+
 
 if __name__ == "__main__":
     main()
