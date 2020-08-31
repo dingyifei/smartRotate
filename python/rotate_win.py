@@ -46,50 +46,55 @@ class Monitor:
         self.config.DisplayOrientation = win32con.DMDO_180
         self.apply_config()
 
-    def rotation_180(self):
+    def rotation_270(self):
         self.config.DisplayOrientation = win32con.DMDO_270
         self.apply_config()
 
     def rotate_cw(self):
         current = self.config.DisplayOrientation
-        if (current == win32con.DMDO_DEFAULT):
+        if current == win32con.DMDO_DEFAULT:
             self.config.DisplayOrientation = win32con.DMDO_270
-        elif (current == win32con.DMDO_90):
+        elif current == win32con.DMDO_90:
             self.config.DisplayOrientation = win32con.DMDO_DEFAULT
-        elif (current == win32con.DMDO_180):
+        elif current == win32con.DMDO_180:
             self.config.DisplayOrientation = win32con.DMDO_90
-        elif (current == win32con.DMDO_270):
+        elif current == win32con.DMDO_270:
             self.config.DisplayOrientation = win32con.DMDO_180
         self.apply_config()
 
     def rotate_ccw(self):
         current = self.config.DisplayOrientation
-        if (current == win32con.DMDO_DEFAULT):
+        if current == win32con.DMDO_DEFAULT:
             self.config.DisplayOrientation = win32con.DMDO_90
-        elif (current == win32con.DMDO_90):
+        elif current == win32con.DMDO_90:
             self.config.DisplayOrientation = win32con.DMDO_180
-        elif (current == win32con.DMDO_180):
+        elif current == win32con.DMDO_180:
             self.config.DisplayOrientation = win32con.DMDO_270
-        elif (current == win32con.DMDO_270):
+        elif current == win32con.DMDO_270:
             self.config.DisplayOrientation = win32con.DMDO_DEFAULT
         self.apply_config()
 
 
 class Monitors():
     def __get_monitors(self):
-        monitors = []
+        displays = []
         i = 0
         while True:
             try:
-                monitor = win32api.EnumDisplayDevices(None, i)
-                try:
-                    win32api.EnumDisplayDevices(monitor.DeviceName, 0)
-                except pywintypes.error:
-                    continue
-                monitors.append(Monitor(monitor))
+                display = win32api.EnumDisplayDevices(None, i)
+                displays.append(display)
             except pywintypes.error:  # run out of displays
                 break
             i += 1
+
+        monitors = []
+        for display in displays:
+            try:
+                win32api.EnumDisplayDevices(display.DeviceName, 0)
+                monitors.append(Monitor(display))
+            except pywintypes.error:
+                continue
+
         return monitors
 
     def __init__(self):
@@ -97,7 +102,7 @@ class Monitors():
 
     def update_monitors(self):
         self.monitors = self.__get_monitors()
-    
+
 def main():
     """
         it's just for testing purposes
