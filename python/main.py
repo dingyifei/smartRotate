@@ -14,11 +14,10 @@ either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 """
 from tkinter import *
-import rotate
+import rotate_win
 
 
 def cmd_ccw():
-
     return 0
 
 
