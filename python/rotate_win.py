@@ -23,16 +23,22 @@ import xml
 # useful doc https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/
 
 class Monitor:
-    def __init__(self, device: win32api.PyDISPLAY_DEVICEType, ):
-        self.device = device
-        self.config = win32api.EnumDisplaySettingsEx(device.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
+    def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType):
+        self.adapter = adapter
+        self.device = win32api.EnumDisplayDevices(adapter.DeviceName, 0)#Device is just for readability
+        self.config = win32api.EnumDisplaySettingsEx(adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
     def update_config(self):
-        self.config = win32api.EnumDisplaySettingsEx(self.device.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
+        self.config = win32api.EnumDisplaySettingsEx(self.adapter.DeviceName, win32con.ENUM_CURRENT_SETTINGS)
 
     def apply_config(self, dwflags=win32con.CDS_RESET):
         dm_size = 4  # private driver data following in the DEVMODE
-        return win32api.ChangeDisplaySettingsEx(self.device.DeviceName, self.config, dwflags)
+        return win32api.ChangeDisplaySettingsEx(self.adapter.DeviceName, self.config)
+
+    def swapPels(self):
+        temp = self.config.PelsHeight
+        self.config.PelsHeight = self.config.PelsWidth
+        self.config.PelsWidth = temp
 
     def rotation_0(self):
         self.config.DisplayOrientation = win32con.DMDO_DEFAULT
@@ -51,6 +57,7 @@ class Monitor:
         self.apply_config()
 
     def rotate_cw(self):
+        self.swapPels()
         current = self.config.DisplayOrientation
         if current == win32con.DMDO_DEFAULT:
             self.config.DisplayOrientation = win32con.DMDO_270
@@ -103,11 +110,19 @@ class Monitors():
     def update_monitors(self):
         self.monitors = self.__get_monitors()
 
+    def get_monitor(self, DeviceKey):
+        for monitor in self.monitors:
+            if monitor.adapter.DeviceKey == DeviceKey:
+                return monitor
+        raise LookupError("Monitor doesn't exist")
+
+
 def main():
     """
         it's just for testing purposes
     """
-
+    a = Monitors()
+    a.monitors[0].rotation_0()
 
 if __name__ == "__main__":
     main()
