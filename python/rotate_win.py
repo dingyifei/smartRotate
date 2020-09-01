@@ -52,6 +52,73 @@ class Monitor:
     #     """
     #     # TODO: compare two monitor
 
+    @classmethod
+    def from_dict(cls, monitor_dict: dict):
+        """
+
+        :param monitor_dict:
+        :return:
+        """
+        adapter = win32api.PyDISPLAY_DEVICEType()
+        device = win32api.PyDISPLAY_DEVICEType()
+        config = pywintypes.DEVMODEWType()
+
+        adapter.DeviceID = monitor_dict["adapter"]["DeviceID"]
+        adapter.DeviceKey = monitor_dict["adapter"]["DeviceKey"]
+        adapter.DeviceName = monitor_dict["adapter"]["DeviceName"]
+        adapter.DeviceString = monitor_dict["adapter"]["DeviceString"]
+        adapter.Size = monitor_dict["adapter"]["Size"]
+        adapter.StateFlags = monitor_dict["adapter"]["StateFlags"]
+
+        device.DeviceID = monitor_dict["device"]["DeviceID"]
+        device.DeviceKey = monitor_dict["device"]["DeviceKey"]
+        device.DeviceName = monitor_dict["device"]["DeviceName"]
+        device.DeviceString = monitor_dict["device"]["DeviceString"]
+        device.Size = monitor_dict["device"]["Size"]
+        device.StateFlags = monitor_dict["device"]["StateFlags"]
+
+        config.BitsPerPel = monitor_dict["config"]["BitsPerPel"]
+        config.Collate = monitor_dict["config"]["Collate"]
+        config.Color = monitor_dict["config"]["Color"]
+        config.Copies = monitor_dict["config"]["Copies"]
+        config.DefaultSource = monitor_dict["config"]["DefaultSource"]
+        config.DeviceName = monitor_dict["config"]["DeviceName"]
+        config.DisplayFixedOutput = monitor_dict["config"]["DisplayFixedOutput"]
+        config.DisplayFlags = monitor_dict["config"]["DisplayFlags"]
+        config.DisplayFrequency = monitor_dict["config"]["DisplayFrequency"]
+        config.DisplayOrientation = monitor_dict["config"]["DisplayOrientation"]
+        config.DitherType = monitor_dict["config"]["DitherType"]
+        config.DriverData = monitor_dict["config"]["DriverData"]
+        config.DriverExtra = monitor_dict["config"]["DriverExtra"]
+        config.DriverVersion = monitor_dict["config"]["DriverVersion"]
+        config.Duplex = monitor_dict["config"]["Duplex"]
+        config.Fields = monitor_dict["config"]["Fields"]
+        config.FormName = monitor_dict["config"]["FormName"]
+        config.ICMIntent = monitor_dict["config"]["ICMIntent"]
+        config.ICMMethod = monitor_dict["config"]["ICMMethod"]
+        config.LogPixels = monitor_dict["config"]["LogPixels"]
+        config.MediaType = monitor_dict["config"]["MediaType"]
+        config.Nup = monitor_dict["config"]["Nup"]
+        config.Orientation = monitor_dict["config"]["Orientation"]
+        config.PanningHeight = monitor_dict["config"]["PanningHeight"]
+        config.PanningWidth = monitor_dict["config"]["PanningWidth"]
+        config.PaperLength = monitor_dict["config"]["PaperLength"]
+        config.PaperSize = monitor_dict["config"]["PaperSize"]
+        config.PaperWidth = monitor_dict["config"]["PaperWidth"]
+        config.PelsHeight = monitor_dict["config"]["PelsHeight"]
+        config.PelsWidth = monitor_dict["config"]["PelsWidth"]
+        config.Position_x = monitor_dict["config"]["Position_x"]
+        config.Position_y = monitor_dict["config"]["Position_y"]
+        config.PrintQuality = monitor_dict["config"]["PrintQuality"]
+        config.Reserved1 = monitor_dict["config"]["Reserved1"]
+        config.Reserved2 = monitor_dict["config"]["Reserved2"]
+        config.Scale = monitor_dict["config"]["Scale"]
+        config.Size = monitor_dict["config"]["Size"]
+        config.SpecVersion = monitor_dict["config"]["SpecVersion"]
+        config.TTOption = monitor_dict["config"]["TTOption"]
+        config.YResolution = monitor_dict["config"]["YResolution"]
+        return cls(adapter, device, config)
+
     def update_config(self):
         """
         This function call win32 api to get the current config
@@ -64,6 +131,73 @@ class Monitor:
         :return: successful when it return 0
         """
         return win32api.ChangeDisplaySettingsEx(self.adapter.DeviceName, self.config)
+
+    def to_dict(self) -> dict:
+        """
+
+        :return:
+        """
+        dict_monitor: dict = {
+            "adapter": {
+                "DeviceID": self.adapter.DeviceID,
+                "DeviceKey": self.adapter.DeviceKey,
+                "DeviceName": self.adapter.DeviceName,
+                "DeviceString": self.adapter.DeviceString,
+                "Size": self.adapter.Size,
+                "StateFlags": self.adapter.StateFlags
+            },
+            "device": {
+                "DeviceID": self.device.DeviceID,
+                "DeviceKey": self.device.DeviceKey,
+                "DeviceName": self.device.DeviceName,
+                "DeviceString": self.device.DeviceString,
+                "Size": self.device.Size,
+                "StateFlags": self.device.StateFlags
+            },
+            "config": {
+                "BitsPerPel": self.config.BitsPerPel,
+                "Collate": self.config.Collate,
+                "Color": self.config.Color,
+                "Copies": self.config.Copies,
+                "DefaultSource": self.config.DefaultSource,
+                "DeviceName": self.config.DeviceName,
+                "DisplayFixedOutput": self.config.DisplayFixedOutput,
+                "DisplayFlags": self.config.DisplayFlags,
+                "DisplayFrequency": self.config.DisplayFrequency,
+                "DisplayOrientation": self.config.DisplayOrientation,
+                "DitherType": self.config.DitherType,
+                "DriverData": self.config.DriverData,
+                "DriverExtra": self.config.DriverExtra,
+                "DriverVersion": self.config.DriverVersion,
+                "Duplex": self.config.Duplex,
+                "Fields": self.config.Fields,
+                "FormName": self.config.FormName,
+                "ICMIntent": self.config.ICMIntent,
+                "ICMMethod": self.config.ICMMethod,
+                "LogPixels": self.config.LogPixels,
+                "MediaType": self.config.MediaType,
+                "Nup": self.config.Nup,
+                "Orientation": self.config.Orientation,
+                "PanningHeight": self.config.PanningHeight,
+                "PanningWidth": self.config.PanningWidth,
+                "PaperLength": self.config.PaperLength,
+                "PaperSize": self.config.PaperSize,
+                "PaperWidth": self.config.PaperWidth,
+                "PelsHeight": self.config.PelsHeight,
+                "PelsWidth": self.config.PelsWidth,
+                "Position_x": self.config.Position_x,
+                "Position_y": self.config.Position_y,
+                "PrintQuality": self.config.PrintQuality,
+                "Reserved1": self.config.Reserved1,
+                "Reserved2": self.config.Reserved2,
+                "Scale": self.config.Scale,
+                "Size": self.config.Size,
+                "SpecVersion": self.config.SpecVersion,
+                "TTOption": self.config.TTOption,
+                "YResolution": self.config.YResolution
+            }
+        }
+        return dict_monitor
 
     def replace_config(self, monitor):
         """
@@ -232,133 +366,24 @@ class Monitors:
 
 
 def save_monitor_to_json(monitor: Monitor, filepath: str):
-    dict_monitor: dict = {
-        "adapter": {
-            "DeviceID": monitor.adapter.DeviceID,
-            "DeviceKey": monitor.adapter.DeviceKey,
-            "DeviceName": monitor.adapter.DeviceName,
-            "DeviceString": monitor.adapter.DeviceString,
-            "Size": monitor.adapter.Size,
-            "StateFlags": monitor.adapter.StateFlags
-        },
-        "device": {
-            "DeviceID": monitor.device.DeviceID,
-            "DeviceKey": monitor.device.DeviceKey,
-            "DeviceName": monitor.device.DeviceName,
-            "DeviceString": monitor.device.DeviceString,
-            "Size": monitor.device.Size,
-            "StateFlags": monitor.device.StateFlags
-        },
-        "config": {
-            "BitsPerPel": monitor.config.BitsPerPel,
-            "Collate": monitor.config.Collate,
-            "Color": monitor.config.Color,
-            "Copies": monitor.config.Copies,
-            "DefaultSource": monitor.config.DefaultSource,
-            "DeviceName": monitor.config.DeviceName,
-            "DisplayFixedOutput": monitor.config.DisplayFixedOutput,
-            "DisplayFlags": monitor.config.DisplayFlags,
-            "DisplayFrequency": monitor.config.DisplayFrequency,
-            "DisplayOrientation": monitor.config.DisplayOrientation,
-            "DitherType": monitor.config.DitherType,
-            "DriverData": monitor.config.DriverData,
-            "DriverExtra": monitor.config.DriverExtra,
-            "DriverVersion": monitor.config.DriverVersion,
-            "Duplex": monitor.config.Duplex,
-            "Fields": monitor.config.Fields,
-            "FormName": monitor.config.FormName,
-            "ICMIntent": monitor.config.ICMIntent,
-            "ICMMethod": monitor.config.ICMMethod,
-            "LogPixels": monitor.config.LogPixels,
-            "MediaType": monitor.config.MediaType,
-            "Nup": monitor.config.Nup,
-            "Orientation": monitor.config.Orientation,
-            "PanningHeight": monitor.config.PanningHeight,
-            "PanningWidth": monitor.config.PanningWidth,
-            "PaperLength": monitor.config.PaperLength,
-            "PaperSize": monitor.config.PaperSize,
-            "PaperWidth": monitor.config.PaperWidth,
-            "PelsHeight": monitor.config.PelsHeight,
-            "PelsWidth": monitor.config.PelsWidth,
-            "Position_x": monitor.config.Position_x,
-            "Position_y": monitor.config.Position_y,
-            "PrintQuality": monitor.config.PrintQuality,
-            "Reserved1": monitor.config.Reserved1,
-            "Reserved2": monitor.config.Reserved2,
-            "Scale": monitor.config.Scale,
-            "Size": monitor.config.Size,
-            "SpecVersion": monitor.config.SpecVersion,
-            "TTOption": monitor.config.TTOption,
-            "YResolution": monitor.config.YResolution
-        }
-    }
+    """
+
+    :param monitor:
+    :param filepath:
+    """
     with open(filepath, 'w') as file:
-        json.dump(dict_monitor, file, sort_keys=True, indent=4)
+        json.dump(monitor.to_dict(), file, sort_keys=True, indent=4)
+
 
 def import_monitor_from_json(filepath: str):
-    adapter = win32api.PyDISPLAY_DEVICEType()
-    device = win32api.PyDISPLAY_DEVICEType()
-    config = pywintypes.DEVMODEWType()
-    json_dict = None
+    """
+
+    :param filepath:
+    :return:
+    """
     with open(filepath, 'r') as file:
-        json_dict = json.load(file)
+        return Monitor.from_dict(json.load(file))
 
-    adapter.DeviceID = json_dict["adapter"]["DeviceID"]
-    adapter.DeviceKey = json_dict["adapter"]["DeviceKey"]
-    adapter.DeviceName = json_dict["adapter"]["DeviceName"]
-    adapter.DeviceString = json_dict["adapter"]["DeviceString"]
-    adapter.Size = json_dict["adapter"]["Size"]
-    adapter.StateFlags = json_dict["adapter"]["StateFlags"]
-
-    device.DeviceID = json_dict["device"]["DeviceID"]
-    device.DeviceKey = json_dict["device"]["DeviceKey"]
-    device.DeviceName = json_dict["device"]["DeviceName"]
-    device.DeviceString = json_dict["device"]["DeviceString"]
-    device.Size = json_dict["device"]["Size"]
-    device.StateFlags = json_dict["device"]["StateFlags"]
-
-    config.BitsPerPel = json_dict["config"]["BitsPerPel"]
-    config.Collate = json_dict["config"]["Collate"]
-    config.Color = json_dict["config"]["Color"]
-    config.Copies = json_dict["config"]["Copies"]
-    config.DefaultSource = json_dict["config"]["DefaultSource"]
-    config.DeviceName = json_dict["config"]["DeviceName"]
-    config.DisplayFixedOutput = json_dict["config"]["DisplayFixedOutput"]
-    config.DisplayFlags = json_dict["config"]["DisplayFlags"]
-    config.DisplayFrequency = json_dict["config"]["DisplayFrequency"]
-    config.DisplayOrientation = json_dict["config"]["DisplayOrientation"]
-    config.DitherType = json_dict["config"]["DitherType"]
-    config.DriverData = json_dict["config"]["DriverData"]
-    config.DriverExtra = json_dict["config"]["DriverExtra"]
-    config.DriverVersion = json_dict["config"]["DriverVersion"]
-    config.Duplex = json_dict["config"]["Duplex"]
-    config.Fields = json_dict["config"]["Fields"]
-    config.FormName = json_dict["config"]["FormName"]
-    config.ICMIntent = json_dict["config"]["ICMIntent"]
-    config.ICMMethod = json_dict["config"]["ICMMethod"]
-    config.LogPixels = json_dict["config"]["LogPixels"]
-    config.MediaType = json_dict["config"]["MediaType"]
-    config.Nup = json_dict["config"]["Nup"]
-    config.Orientation = json_dict["config"]["Orientation"]
-    config.PanningHeight = json_dict["config"]["PanningHeight"]
-    config.PanningWidth = json_dict["config"]["PanningWidth"]
-    config.PaperLength = json_dict["config"]["PaperLength"]
-    config.PaperSize = json_dict["config"]["PaperSize"]
-    config.PaperWidth = json_dict["config"]["PaperWidth"]
-    config.PelsHeight = json_dict["config"]["PelsHeight"]
-    config.PelsWidth = json_dict["config"]["PelsWidth"]
-    config.Position_x = json_dict["config"]["Position_x"]
-    config.Position_y = json_dict["config"]["Position_y"]
-    config.PrintQuality = json_dict["config"]["PrintQuality"]
-    config.Reserved1 = json_dict["config"]["Reserved1"]
-    config.Reserved2 = json_dict["config"]["Reserved2"]
-    config.Scale = json_dict["config"]["Scale"]
-    config.Size = json_dict["config"]["Size"]
-    config.SpecVersion = json_dict["config"]["SpecVersion"]
-    config.TTOption = json_dict["config"]["TTOption"]
-    config.YResolution = json_dict["config"]["YResolution"]
-
-    return Monitor(adapter, device, config)
 
 def main():
     """
