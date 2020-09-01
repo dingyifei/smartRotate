@@ -204,6 +204,9 @@ class Monitors:
     def __getitem__(self, item) -> Monitor:
         return self.monitors[item]
 
+    def __len__(self):
+        return len(self.monitors)
+
     def get_monitor_from_key(self, DeviceKey: str) -> Monitor:
         """
         find the monitor with the provided DeviceKey
@@ -232,6 +235,8 @@ def main():
         it's just for testing purposes
     """
     monitors = Monitors()
+    for monitor in monitors:
+        print(monitor.get_device_id())
 
 
 if __name__ == "__main__":
