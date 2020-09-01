@@ -231,7 +231,7 @@ class Monitors:
         raise LookupError("%s Monitor does not exist" % DeviceID)
 
 
-def save_monitor_in_json(monitor: Monitor):
+def save_monitor_in_json(monitor: Monitor, filepath: str):
     dict_monitor: dict = {
         "adapter": {
             "DeviceID": monitor.adapter.DeviceID,
@@ -292,17 +292,18 @@ def save_monitor_in_json(monitor: Monitor):
             "YResolution": monitor.config.YResolution
         }
     }
-    print(json.dumps(dict_monitor))
+    with open(filepath, 'w') as file:
+        json.dump(dict_monitor, file, sort_keys=True, indent=4)
 
 
 def main():
     """
-        it's just for testing purposes
+    it's just for testing purposes
     """
     monitors = Monitors()
     for monitor in monitors:
         print(monitor.get_device_id())
-        save_monitor_in_json(monitor)
+        save_monitor_in_json(monitor, "a.json")
 
 
 if __name__ == "__main__":

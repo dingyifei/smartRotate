@@ -391,4 +391,5 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/c,cmake,clion,python
-F3DiscoveryMbed/cmake-build-debug/
+
+*.json
