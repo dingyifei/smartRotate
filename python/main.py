@@ -36,11 +36,15 @@ def cmd_bind():
 
 
 def main():
+    monitors = Monitors()
+
     """
     This is the GUI for rotating display, etc
     """
     main_window = Tk()
     main_window.title("Smart Rotate")
+    main_window.resizable(True, True)
+
     main_frame = Frame(main_window)
     main_frame.grid(sticky=(N, W, E, S))
     # main_window.columnconfigure()
@@ -58,8 +62,13 @@ def main():
     label_z_rotation.grid(column=0, row=2, sticky=W)
     label_orientation = Label(main_frame, text="Orientation:")
     label_orientation.grid(column=0, row=3, sticky=W)
-    menubutton_display = Listbox(main_frame)
-    menubutton_display.grid(column=0, row=4, sticky=W, columnspan=2)
+    listbox_monitors = Listbox(main_frame)
+    listbox_monitors.grid(columnspan=3, column=0, row=4, sticky=W)
+
+    i = 1
+    for key in monitors.to_dict().keys():
+        listbox_monitors.insert(i, "%s (%s)" % (monitors.to_dict()[key], key))
+        i += 1
 
     label_x_reading = Label(main_frame, textvariable=x_rotation)
     label_x_reading.grid(column=1, row=0, sticky=W)
@@ -71,13 +80,13 @@ def main():
     label_orientation.grid(column=1, row=3, sticky=W)
 
     btn_ccw = Button(main_frame, text="CCW Turn", command=cmd_ccw)
-    btn_ccw.grid(column=2, row=0, sticky=EW, ipadx=5)
+    btn_ccw.grid(column=2, row=0, sticky=EW)
     btn_cw = Button(main_frame, text="CW Turn", command=cmd_cw)
-    btn_cw.grid(column=2, row=1, sticky=EW, ipadx=5)
+    btn_cw.grid(column=2, row=1, sticky=EW)
     btn_rst = Button(main_frame, text="Reset", command=cmd_rst)
-    btn_rst.grid(column=2, row=2, sticky=EW, ipadx=5)
+    btn_rst.grid(column=2, row=2, sticky=EW)
     btn_bind = Button(main_frame, text="Bind", command=cmd_bind)
-    btn_bind.grid(column=2, row=3, sticky=EW, ipadx=5)
+    btn_bind.grid(column=2, row=3, sticky=EW)
 
     main_window.mainloop()
 

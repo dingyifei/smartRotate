@@ -14,10 +14,11 @@ either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 """
 
+import json
+
 import pywintypes
 import win32api
 import win32con
-import json
 
 
 # useful doc https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/
@@ -205,15 +206,19 @@ class Monitor:
         return dict_monitor
 
     def to_json(self, filepath: str):
+        """
+
+        :param filepath:
+        """
         with open(filepath, 'w') as file:
             json.dump(self.to_dict(), file, sort_keys=True, indent=4)
 
-    def replace_config(self, monitor):
+    def replace_config(self, config: pywintypes.DEVMODEWType):
         """
         replace the config of the current monitor object with a config from another monitor object
-        :param monitor:
+        :param config:
         """
-        self.config = monitor.config
+        self.config = config
 
     def get_device_id(self) -> str:
         """
@@ -373,15 +378,21 @@ class Monitors:
                 return monitor
         raise LookupError("%s Monitor does not exist" % DeviceID)
 
+    def to_dict(self) -> dict:
+        monitors = {}
+        for monitor in self.monitors:
+            monitors[monitor.get_device_id()] = monitor.get_device_string()
+        return monitors
+
 
 def main():
     """
     it's just for testing purposes
     """
     monitors = Monitors()
+    a = monitors.to_dict()
     for monitor in monitors:
         print(monitor.get_device_id())
-        save_monitor_to_json(monitor, "a.json")
 
 
 if __name__ == "__main__":
