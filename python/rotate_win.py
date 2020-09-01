@@ -17,6 +17,7 @@ See the License for the specific language governing permissions and limitations 
 import pywintypes
 import win32api
 import win32con
+import json
 
 
 # useful doc https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/
@@ -29,7 +30,7 @@ class Monitor:
 
     def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType,
                  device: win32api.PyDISPLAY_DEVICEType = None,
-                 config: list = None):
+                 config: pywintypes.DEVMODEType = None):
         self.adapter = adapter
         if device is not None:
             self.device = device
@@ -43,13 +44,13 @@ class Monitor:
     def __str__(self) -> str:
         return self.get_device_string()
 
-    def __eq__(self, other):
-        """
-        Compare two monitor object, return false when Device and Adapter doesn't match with the input
-        :param other: another monitor object
-        :return: true if they are the same (regardless of the config)
-        """
-        # TODO: compare two monitor
+    # def __eq__(self, other):
+    #     """
+    #     Compare two monitor object, return false when Device and Adapter doesn't match with the input
+    #     :param other: another monitor object
+    #     :return: true if they are the same (regardless of the config)
+    #     """
+    #     # TODO: compare two monitor
 
     def update_config(self):
         """
@@ -230,6 +231,70 @@ class Monitors:
         raise LookupError("%s Monitor does not exist" % DeviceID)
 
 
+def save_monitor_in_json(monitor: Monitor):
+    dict_monitor: dict = {
+        "adapter": {
+            "DeviceID": monitor.adapter.DeviceID,
+            "DeviceKey": monitor.adapter.DeviceKey,
+            "DeviceName": monitor.adapter.DeviceName,
+            "DeviceString": monitor.adapter.DeviceString,
+            "Size": str(monitor.adapter.Size),
+            "StateFlags": str(monitor.adapter.StateFlags)
+        },
+        "device": {
+            "DeviceID": monitor.device.DeviceID,
+            "DeviceKey": monitor.device.DeviceKey,
+            "DeviceName": monitor.device.DeviceName,
+            "DeviceString": monitor.device.DeviceString,
+            "Size": str(monitor.device.Size),
+            "StateFlags": str(monitor.device.StateFlags)
+        },
+        "config": {
+            "BitsPerPel": monitor.config.BitsPerPel,
+            "Collate": monitor.config.Collate,
+            "Color": monitor.config.Color,
+            "Copies": monitor.config.Copies,
+            "DefaultSource": monitor.config.DefaultSource,
+            "DeviceName": monitor.config.DeviceName,
+            "DisplayFixedOutput": monitor.config.DisplayFixedOutput,
+            "DisplayFlags": monitor.config.DisplayFlags,
+            "DisplayFrequency": monitor.config.DisplayFrequency,
+            "DisplayOrientation": monitor.config.DisplayOrientation,
+            "DitherType": monitor.config.DitherType,
+            "DriverData": monitor.config.DriverData,
+            "DriverExtra": monitor.config.DriverExtra,
+            "DriverVersion": monitor.config.DriverVersion,
+            "Duplex": monitor.config.Duplex,
+            "Fields": monitor.config.Fields,
+            "FormName": monitor.config.FormName,
+            "ICMIntent": monitor.config.ICMIntent,
+            "ICMMethod": monitor.config.ICMMethod,
+            "LogPixels": monitor.config.LogPixels,
+            "MediaType": monitor.config.MediaType,
+            "Nup": monitor.config.Nup,
+            "Orientation": monitor.config.Orientation,
+            "PanningHeight": monitor.config.PanningHeight,
+            "PanningWidth": monitor.config.PanningWidth,
+            "PaperLength": monitor.config.PaperLength,
+            "PaperSize": monitor.config.PaperSize,
+            "PaperWidth": monitor.config.PaperWidth,
+            "PelsHeight": monitor.config.PelsHeight,
+            "PelsWidth": monitor.config.PelsWidth,
+            "Position_x": monitor.config.Position_x,
+            "Position_y": monitor.config.Position_y,
+            "PrintQuality": monitor.config.PrintQuality,
+            "Reserved1": monitor.config.Reserved1,
+            "Reserved2": monitor.config.Reserved2,
+            "Scale": monitor.config.Scale,
+            "Size": monitor.config.Size,
+            "SpecVersion": monitor.config.SpecVersion,
+            "TTOption": monitor.config.TTOption,
+            "YResolution": monitor.config.YResolution
+        }
+    }
+    print(json.dumps(dict_monitor))
+
+
 def main():
     """
         it's just for testing purposes
@@ -237,6 +302,7 @@ def main():
     monitors = Monitors()
     for monitor in monitors:
         print(monitor.get_device_id())
+        save_monitor_in_json(monitor)
 
 
 if __name__ == "__main__":

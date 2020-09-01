@@ -14,7 +14,9 @@ either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 """
 from tkinter import *
-import rotate_win
+import os
+if os.name == "nt":
+    from rotate_win import *
 
 
 def cmd_ccw():
