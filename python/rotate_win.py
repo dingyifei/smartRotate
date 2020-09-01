@@ -30,7 +30,7 @@ class Monitor:
 
     def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType,
                  device: win32api.PyDISPLAY_DEVICEType = None,
-                 config: pywintypes.DEVMODEType = None):
+                 config: pywintypes.DEVMODEWType = None):
         self.adapter = adapter
         if device is not None:
             self.device = device
@@ -231,23 +231,23 @@ class Monitors:
         raise LookupError("%s Monitor does not exist" % DeviceID)
 
 
-def save_monitor_in_json(monitor: Monitor, filepath: str):
+def save_monitor_to_json(monitor: Monitor, filepath: str):
     dict_monitor: dict = {
         "adapter": {
             "DeviceID": monitor.adapter.DeviceID,
             "DeviceKey": monitor.adapter.DeviceKey,
             "DeviceName": monitor.adapter.DeviceName,
             "DeviceString": monitor.adapter.DeviceString,
-            "Size": str(monitor.adapter.Size),
-            "StateFlags": str(monitor.adapter.StateFlags)
+            "Size": monitor.adapter.Size,
+            "StateFlags": monitor.adapter.StateFlags
         },
         "device": {
             "DeviceID": monitor.device.DeviceID,
             "DeviceKey": monitor.device.DeviceKey,
             "DeviceName": monitor.device.DeviceName,
             "DeviceString": monitor.device.DeviceString,
-            "Size": str(monitor.device.Size),
-            "StateFlags": str(monitor.device.StateFlags)
+            "Size": monitor.device.Size,
+            "StateFlags": monitor.device.StateFlags
         },
         "config": {
             "BitsPerPel": monitor.config.BitsPerPel,
@@ -295,6 +295,70 @@ def save_monitor_in_json(monitor: Monitor, filepath: str):
     with open(filepath, 'w') as file:
         json.dump(dict_monitor, file, sort_keys=True, indent=4)
 
+def import_monitor_from_json(filepath: str):
+    adapter = win32api.PyDISPLAY_DEVICEType()
+    device = win32api.PyDISPLAY_DEVICEType()
+    config = pywintypes.DEVMODEWType()
+    json_dict = None
+    with open(filepath, 'r') as file:
+        json_dict = json.load(file)
+
+    adapter.DeviceID = json_dict["adapter"]["DeviceID"]
+    adapter.DeviceKey = json_dict["adapter"]["DeviceKey"]
+    adapter.DeviceName = json_dict["adapter"]["DeviceName"]
+    adapter.DeviceString = json_dict["adapter"]["DeviceString"]
+    adapter.Size = json_dict["adapter"]["Size"]
+    adapter.StateFlags = json_dict["adapter"]["StateFlags"]
+
+    device.DeviceID = json_dict["device"]["DeviceID"]
+    device.DeviceKey = json_dict["device"]["DeviceKey"]
+    device.DeviceName = json_dict["device"]["DeviceName"]
+    device.DeviceString = json_dict["device"]["DeviceString"]
+    device.Size = json_dict["device"]["Size"]
+    device.StateFlags = json_dict["device"]["StateFlags"]
+
+    config.BitsPerPel = json_dict["config"]["BitsPerPel"]
+    config.Collate = json_dict["config"]["Collate"]
+    config.Color = json_dict["config"]["Color"]
+    config.Copies = json_dict["config"]["Copies"]
+    config.DefaultSource = json_dict["config"]["DefaultSource"]
+    config.DeviceName = json_dict["config"]["DeviceName"]
+    config.DisplayFixedOutput = json_dict["config"]["DisplayFixedOutput"]
+    config.DisplayFlags = json_dict["config"]["DisplayFlags"]
+    config.DisplayFrequency = json_dict["config"]["DisplayFrequency"]
+    config.DisplayOrientation = json_dict["config"]["DisplayOrientation"]
+    config.DitherType = json_dict["config"]["DitherType"]
+    config.DriverData = json_dict["config"]["DriverData"]
+    config.DriverExtra = json_dict["config"]["DriverExtra"]
+    config.DriverVersion = json_dict["config"]["DriverVersion"]
+    config.Duplex = json_dict["config"]["Duplex"]
+    config.Fields = json_dict["config"]["Fields"]
+    config.FormName = json_dict["config"]["FormName"]
+    config.ICMIntent = json_dict["config"]["ICMIntent"]
+    config.ICMMethod = json_dict["config"]["ICMMethod"]
+    config.LogPixels = json_dict["config"]["LogPixels"]
+    config.MediaType = json_dict["config"]["MediaType"]
+    config.Nup = json_dict["config"]["Nup"]
+    config.Orientation = json_dict["config"]["Orientation"]
+    config.PanningHeight = json_dict["config"]["PanningHeight"]
+    config.PanningWidth = json_dict["config"]["PanningWidth"]
+    config.PaperLength = json_dict["config"]["PaperLength"]
+    config.PaperSize = json_dict["config"]["PaperSize"]
+    config.PaperWidth = json_dict["config"]["PaperWidth"]
+    config.PelsHeight = json_dict["config"]["PelsHeight"]
+    config.PelsWidth = json_dict["config"]["PelsWidth"]
+    config.Position_x = json_dict["config"]["Position_x"]
+    config.Position_y = json_dict["config"]["Position_y"]
+    config.PrintQuality = json_dict["config"]["PrintQuality"]
+    config.Reserved1 = json_dict["config"]["Reserved1"]
+    config.Reserved2 = json_dict["config"]["Reserved2"]
+    config.Scale = json_dict["config"]["Scale"]
+    config.Size = json_dict["config"]["Size"]
+    config.SpecVersion = json_dict["config"]["SpecVersion"]
+    config.TTOption = json_dict["config"]["TTOption"]
+    config.YResolution = json_dict["config"]["YResolution"]
+
+    return Monitor(adapter, device, config)
 
 def main():
     """
@@ -303,7 +367,7 @@ def main():
     monitors = Monitors()
     for monitor in monitors:
         print(monitor.get_device_id())
-        save_monitor_in_json(monitor, "a.json")
+        save_monitor_to_json(monitor, "a.json")
 
 
 if __name__ == "__main__":

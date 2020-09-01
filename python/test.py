@@ -32,6 +32,10 @@ class Rotate(unittest.TestCase):
         with self.assertRaises(LookupError):
             a.get_monitor_from_id("")
 
+    def test_monitor_json(self):
+        return 0
+        #TODO: write test for this thing
+
 
 if __name__ == '__main__':
     unittest.main()
