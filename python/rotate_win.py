@@ -119,6 +119,11 @@ class Monitor:
         config.YResolution = monitor_dict["config"]["YResolution"]
         return cls(adapter, device, config)
 
+    @classmethod
+    def from_json(cls, filepath: str):
+        with open(filepath, 'r') as file:
+            return cls.from_dict(json.load(file))
+
     def update_config(self):
         """
         This function call win32 api to get the current config
@@ -198,6 +203,10 @@ class Monitor:
             }
         }
         return dict_monitor
+
+    def to_json(self, filepath: str):
+        with open(filepath, 'w') as file:
+            json.dump(self.to_dict(), file, sort_keys=True, indent=4)
 
     def replace_config(self, monitor):
         """
@@ -363,26 +372,6 @@ class Monitors:
             if monitor.get_device_id() == DeviceID:
                 return monitor
         raise LookupError("%s Monitor does not exist" % DeviceID)
-
-
-def save_monitor_to_json(monitor: Monitor, filepath: str):
-    """
-
-    :param monitor:
-    :param filepath:
-    """
-    with open(filepath, 'w') as file:
-        json.dump(monitor.to_dict(), file, sort_keys=True, indent=4)
-
-
-def import_monitor_from_json(filepath: str):
-    """
-
-    :param filepath:
-    :return:
-    """
-    with open(filepath, 'r') as file:
-        return Monitor.from_dict(json.load(file))
 
 
 def main():
