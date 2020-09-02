@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>889</width>
-    <height>286</height>
+    <width>553</width>
+    <height>251</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,130 +16,111 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QListWidget" name="listWidget"/>
-      </item>
-      <item>
-       <widget class="QSplitter" name="splitter">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <widget class="QPushButton" name="pushButton_default">
-         <property name="text">
-          <string>Set Default</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_90">
-         <property name="text">
-          <string>Set 90</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_180">
-         <property name="text">
-          <string>Set 180</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_270">
-         <property name="text">
-          <string>Set 270</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSplitter" name="splitter_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <widget class="QPushButton" name="pushButton_ccw">
-         <property name="text">
-          <string>Turn CCW</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_cw">
-         <property name="text">
-          <string>Turn CW</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_load">
-         <property name="text">
-          <string>Load</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_save">
-         <property name="text">
-          <string>Save</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QLabel" name="label_x">
-          <property name="text">
-           <string>x:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_y">
-          <property name="text">
-           <string>y:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_z">
-          <property name="text">
-           <string>z:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QSplitter" name="splitter_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <widget class="QPushButton" name="pushButton_saveProfile">
-         <property name="text">
-          <string>Save Profile</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_setSensorDefult">
-         <property name="text">
-          <string>Set Sensor Default</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <widget class="Line" name="line">
+     <widget class="QSplitter" name="splitter_7">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
+      <widget class="QLabel" name="label_status">
+       <property name="text">
+        <string>Status:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QSplitter" name="splitter_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QSplitter" name="splitter_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QPushButton" name="pushButton_180">
+          <property name="text">
+           <string>Set 180</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_default">
+          <property name="text">
+           <string>Set Default</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_270">
+          <property name="text">
+           <string>Set 270</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_90">
+          <property name="text">
+           <string>Set 90</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QSplitter" name="splitter_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QPushButton" name="pushButton_ccw">
+          <property name="text">
+           <string>Turn CCW</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_cw">
+          <property name="text">
+           <string>Turn CW</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_load">
+          <property name="text">
+           <string>Load</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_save">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QSplitter" name="splitter_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QLabel" name="label_x">
+         <property name="text">
+          <string>x:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_y">
+         <property name="text">
+          <string>y:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_z">
+         <property name="text">
+          <string>z:</string>
+         </property>
+        </widget>
+        <widget class="QSplitter" name="splitter_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QPushButton" name="pushButton_saveProfile">
+          <property name="text">
+           <string>Save Profile</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_setSensorDefult">
+          <property name="text">
+           <string>Set Sensor Default</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -149,7 +130,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>889</width>
+     <width>553</width>
      <height>26</height>
     </rect>
    </property>

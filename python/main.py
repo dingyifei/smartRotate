@@ -13,33 +13,85 @@ either express or implied.
 
 See the License for the specific language governing permissions and limitations under the License.
 """
-from PyQt5 import QtWidgets
 import os
 import sys
+
+from PyQt5 import QtWidgets
+
 from mainWindow import Ui_MainWindow
 
 if os.name == "nt":
     from rotate_win import *
 
 
-
-
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self, *args, obj=None, **kwargs):
+    def __init__(self, monitors: Monitors = Monitors(), *args, obj=None, **kwargs):
+        self.monitors = Monitors()
+
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
 
+        self.pushButton_default.clicked.connect(self.btn_default)
+        self.pushButton_90.clicked.connect(self.btn_90)
+        self.pushButton_180.clicked.connect(self.btn_180)
+        self.pushButton_270.clicked.connect(self.btn_270)
 
-app = QtWidgets.QApplication(sys.argv)
+        self.pushButton_ccw.clicked.connect(self.btn_ccw)
+        self.pushButton_cw.clicked.connect(self.btn_cw)
 
-window = MainWindow()
-window.show()
-app.exec()
+        self.update_list()
+
+    def update_monitors(self):
+        self.monitors = Monitors()
+
+    def update_list(self):
+        self.update_monitors()
+        self.comboBox.clear()
+        for monitor in self.monitors:
+            self.comboBox.addItem("%s (%s)" % (monitor.get_device_string(), monitor.get_device_id()))
+
+    def get_selected_monitor_pos(self) -> int:
+        currentIndex = self.comboBox.currentIndex()
+        if currentIndex == -1:
+            return 0
+        else:
+            return currentIndex
+
+    def btn_default(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_default()
+
+    def btn_90(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_90()
+
+    def btn_180(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_180()
+
+    def btn_270(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_270()
+
+    def btn_ccw(self):
+        self.monitors[self.get_selected_monitor_pos()].rotate_ccw()
+
+    def btn_cw(self):
+        self.monitors[self.get_selected_monitor_pos()].rotate_cw()
+
+    def btn_load(self):
+        return 0
+        fp = ""
+        self.monitors[self.get_selected_monitor_pos()].replace_config(Monitor.from_json(fp).config)
+
+    def btn_save(self):
+        return 0
+        fp = ""
+        self.monitors[self.get_selected_monitor_pos()].to_json(fp)
 
 
 def main():
-    return 0
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
+
 
 if __name__ == "__main__":
     main()
