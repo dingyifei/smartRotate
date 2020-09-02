@@ -13,83 +13,33 @@ either express or implied.
 
 See the License for the specific language governing permissions and limitations under the License.
 """
-from tkinter import *
+from PyQt5 import QtWidgets
 import os
+import sys
+from mainWindow import Ui_MainWindow
+
 if os.name == "nt":
     from rotate_win import *
 
 
-def cmd_ccw():
-    return 0
 
 
-def cmd_cw():
-    return 0
+
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setupUi(self)
 
 
-def cmd_rst():
-    return 0
+app = QtWidgets.QApplication(sys.argv)
 
-
-def cmd_bind():
-    return 0
+window = MainWindow()
+window.show()
+app.exec()
 
 
 def main():
-    monitors = Monitors()
-
-    """
-    This is the GUI for rotating display, etc
-    """
-    main_window = Tk()
-    main_window.title("Smart Rotate")
-    main_window.resizable(True, True)
-
-    main_frame = Frame(main_window)
-    main_frame.grid(sticky=(N, W, E, S))
-    # main_window.columnconfigure()
-    # main_window.rowconfigure()
-    x_rotation = IntVar()
-    y_rotation = IntVar()
-    z_rotation = IntVar()
-    orientation = StringVar()
-
-    label_x_rotation = Label(main_frame, text="X Rotation:")
-    label_x_rotation.grid(column=0, row=0, sticky=W)
-    label_y_rotation = Label(main_frame, text="Y Rotation:")
-    label_y_rotation.grid(column=0, row=1, sticky=W)
-    label_z_rotation = Label(main_frame, text="Z Rotation:")
-    label_z_rotation.grid(column=0, row=2, sticky=W)
-    label_orientation = Label(main_frame, text="Orientation:")
-    label_orientation.grid(column=0, row=3, sticky=W)
-    listbox_monitors = Listbox(main_frame)
-    listbox_monitors.grid(columnspan=3, column=0, row=4, sticky=W)
-
-    i = 1
-    for key in monitors.to_dict().keys():
-        listbox_monitors.insert(i, "%s (%s)" % (monitors.to_dict()[key], key))
-        i += 1
-
-    label_x_reading = Label(main_frame, textvariable=x_rotation)
-    label_x_reading.grid(column=1, row=0, sticky=W)
-    label_y_reading = Label(main_frame, textvariable=y_rotation)
-    label_y_reading.grid(column=1, row=1, sticky=W)
-    label_z_reading = Label(main_frame, textvariable=z_rotation)
-    label_z_reading.grid(column=1, row=2, sticky=W)
-    label_orientation = Label(main_frame, textvariable=orientation)
-    label_orientation.grid(column=1, row=3, sticky=W)
-
-    btn_ccw = Button(main_frame, text="CCW Turn", command=cmd_ccw)
-    btn_ccw.grid(column=2, row=0, sticky=EW)
-    btn_cw = Button(main_frame, text="CW Turn", command=cmd_cw)
-    btn_cw.grid(column=2, row=1, sticky=EW)
-    btn_rst = Button(main_frame, text="Reset", command=cmd_rst)
-    btn_rst.grid(column=2, row=2, sticky=EW)
-    btn_bind = Button(main_frame, text="Bind", command=cmd_bind)
-    btn_bind.grid(column=2, row=3, sticky=EW)
-
-    main_window.mainloop()
-
+    return 0
 
 if __name__ == "__main__":
     main()
