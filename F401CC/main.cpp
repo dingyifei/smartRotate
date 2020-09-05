@@ -1,13 +1,11 @@
 #include "mbed.h"
+#include "MPU6050.h"
 
-DigitalOut led1(LED1);
+MPU6050 mpu6050;
 
 int main()
 {
-    while (true) {
-        led1 = !led1;
-        wait_ns(5000000000);
+    i2c.frequency(400000);
 
-    }
 }
 
