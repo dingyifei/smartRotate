@@ -116,7 +116,7 @@ typedef enum {
 #endif
 
     // Generic signals namings
-    LED_GREEN    = PC_13,
+    LED1    = PC_13,
     SERIAL_TX   = STDIO_UART_TX,
     SERIAL_RX   = STDIO_UART_RX,
     USBTX       = STDIO_UART_TX,
