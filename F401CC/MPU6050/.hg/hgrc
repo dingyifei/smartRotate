@@ -1,7 +1,7 @@
 # example repository config (see 'hg help config' for more info)
 [paths]
-mbed-studio-cache = c:\Users\13676\AppData\Local\Mbed Studio\library-cache\os.mbed.com\users\onehorse\code\MPU6050IMU
-default = https://os.mbed.com/users/onehorse/code/MPU6050IMU/
+mbed-studio-cache = c:\Users\13676\AppData\Local\Mbed Studio\library-cache\os.mbed.com\users\garfieldsg\code\MPU6050
+default = https://os.mbed.com/users/garfieldsg/code/MPU6050/
 
 # path aliases to other clones of this repo in URLs or filesystem paths
 # (see 'hg help config.paths' for more info)

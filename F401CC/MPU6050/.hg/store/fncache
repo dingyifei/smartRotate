@@ -1,0 +1,5 @@
+data/I2Cdev.h.i
+data/MPU6050.cpp.i
+data/I2Cdev.cpp.i
+data/helper_3dmath.h.i
+data/MPU6050.h.i
