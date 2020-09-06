@@ -8,14 +8,12 @@
 #define I2Cdev_h
 
 #include "mbed.h"
-
-#define I2C_SDA p28
-#define I2C_SCL p27
+#include "i2c_api.h"
 
 class I2Cdev {
     private:
         I2C i2c;
-        Serial debugSerial;
+        BufferedSerial debugSerial;
     public:
         I2Cdev();
         I2Cdev(PinName i2cSda, PinName i2cScl);        

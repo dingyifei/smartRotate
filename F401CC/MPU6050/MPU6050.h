@@ -405,7 +405,7 @@ THE SOFTWARE.
 class MPU6050 {
     private:
         I2Cdev i2Cdev;
-        Serial debugSerial;
+        BufferedSerial debugSerial;
     public:
         MPU6050();
         MPU6050(uint8_t address);

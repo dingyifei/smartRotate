@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/MPU6050" vcs="hg4idea" />
     <mapping directory="$PROJECT_DIR$/mbed-os" vcs="Git" />
   </component>
 </project>

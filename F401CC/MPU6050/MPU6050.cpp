@@ -79,7 +79,7 @@ void MPU6050::initialize()
 {
 
 #ifdef useDebugSerial
-    debugSerial.printf("MPU6050::initialize start\n");
+    printf("MPU6050::initialize start\n");
 #endif
 
     setClockSource(MPU6050_CLOCK_PLL_XGYRO);
@@ -88,7 +88,7 @@ void MPU6050::initialize()
     setSleepEnabled(false); // thanks to Jack Elston for pointing this one out!
 
 #ifdef useDebugSerial
-    debugSerial.printf("MPU6050::initialize end\n");
+    printf("MPU6050::initialize end\n");
 #endif
 }
 
@@ -99,11 +99,11 @@ void MPU6050::initialize()
 bool MPU6050::testConnection()
 {
 #ifdef useDebugSerial
-    debugSerial.printf("MPU6050::testConnection start\n");
+    printf("MPU6050::testConnection start\n");
 #endif
     uint8_t deviceId = getDeviceID();
 #ifdef useDebugSerial
-    debugSerial.printf("DeviceId = %d\n",deviceId);
+    printf("DeviceId = %d\n",deviceId);
 #endif
     return deviceId == 0x34;
 }
