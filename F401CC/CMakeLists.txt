@@ -17,17 +17,6 @@ SET(CMAKE_C_COMPILER      "arm-none-eabi-gcc")
 SET(CMAKE_CXX_COMPILER    "arm-none-eabi-g++")
 SET(ELF2BIN               "arm-none-eabi-objcopy")
 
-SET(CMAKE_C_USE_RESPONSE_FILE_FOR_LIBRARIES 1)
-SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_LIBRARIES 1)
-SET(CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS 1)
-SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS 1)
-SET(CMAKE_C_USE_RESPONSE_FILE_FOR_INCLUDES 1)
-SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES 1)
-
-set(CMAKE_C_RESPONSE_FILE_LINK_FLAG "@")
-set(CMAKE_CXX_RESPONSE_FILE_LINK_FLAG "@")
-set(CMAKE_C_CREATE_STATIC_LIBRARY "<CMAKE_AR> rc <TARGET> <LINK_FLAGS> <OBJECTS>")
-set(CMAKE_CXX_CREATE_STATIC_LIBRARY "<CMAKE_AR> rc <TARGET> <LINK_FLAGS> <OBJECTS>")
 
 # if the environment does not specify build type, set to Debug
 IF(NOT CMAKE_BUILD_TYPE)
@@ -40,7 +29,7 @@ ENDIF()
 PROJECT(F401CC C CXX ASM)
 
 # uncomment below to have a verbose build process
-#SET(CMAKE_VERBOSE_MAKEFILE ON)
+SET(CMAKE_VERBOSE_MAKEFILE ON)
 
 SET(LD_SYS_LIBS "-Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys  -Wl,--end-group")
 
@@ -49,6 +38,18 @@ SET(CMAKE_CXX_FLAGS "-g3 -std=gnu++14 -fno-rtti -Wvla -Wall -Wextra -Wno-unused-
 SET(CMAKE_ASM_FLAGS "-g3 -x assembler-with-cpp -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -fmessage-length=0 -fno-exceptions -ffunction-sections -fdata-sections -funsigned-char -MMD -fomit-frame-pointer -Og -DMBED_DEBUG -DMBED_TRAP_ERRORS_ENABLED=1 -DMBED_MINIMAL_PRINTF -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp  -include mbed_config.h")
 SET(CMAKE_CXX_LINK_FLAGS "-Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,__malloc_r -Wl,--wrap,__free_r -Wl,--wrap,__realloc_r -Wl,--wrap,__memalign_r -Wl,--wrap,__calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -Wl,--wrap,printf -Wl,--wrap,sprintf -Wl,--wrap,snprintf -Wl,--wrap,vprintf -Wl,--wrap,vsprintf -Wl,--wrap,vsnprintf -Wl,--wrap,fprintf -Wl,--wrap,vfprintf -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -fmessage-length=0 -fno-exceptions -ffunction-sections -fdata-sections -funsigned-char -MMD -fomit-frame-pointer -Og -DMBED_DEBUG -DMBED_TRAP_ERRORS_ENABLED=1 -DMBED_MINIMAL_PRINTF -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DMBED_BOOT_STACK_SIZE=1024 -DXIP_ENABLE=0 ")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} ${LD_SYS_LIBS} -T ${CMAKE_BINARY_DIR}/F401CC_pp.link_script.ld")
+
+
+SET(CMAKE_C_USE_RESPONSE_FILE_FOR_LIBRARIES 1)
+SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_LIBRARIES 1)
+SET(CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_C_USE_RESPONSE_FILE_FOR_INCLUDES 1)
+SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES 1)
+
+SET(CMAKE_ASM_USE_RESPONSE_FILE_FOR_LIBRARIES 1)
+SET(CMAKE_ASM_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_ASM_USE_RESPONSE_FILE_FOR_INCLUDES 1)
 
 ADD_DEFINITIONS(
   -DARM_MATH_CM4
@@ -75,7 +76,7 @@ ADD_DEFINITIONS(
   -DDEVICE_STDIO_MESSAGES=1
   -DDEVICE_USTICKER=1
   -DDEVICE_WATCHDOG=1
-  -DMBED_BUILD_TIMESTAMP=1599357871.3240817
+  -DMBED_BUILD_TIMESTAMP=1599376364.3301733
   -DSTM32F401xC
   -DTARGET_CORTEX
   -DTARGET_CORTEX_M
