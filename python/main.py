@@ -16,13 +16,13 @@ See the License for the specific language governing permissions and limitations 
 import os
 import sys
 from PyQt5 import QtWidgets
-import pywinusb
 
 from mainWindow import Ui_MainWindow
 
 if os.name == "nt":
     from rotate_win import *
-    
+
+
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, monitors: Monitors = Monitors(), *args, obj=None, **kwargs):
         self.monitors = Monitors()
