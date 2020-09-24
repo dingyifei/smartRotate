@@ -26,7 +26,7 @@ import win32con
 
 class Monitor:
     """
-    A class to represent a monitor(an adapter to be exact)
+    Object containing the configuration and adapter, display data of a monitor.
     """
 
     def __init__(self, adapter: win32api.PyDISPLAY_DEVICEType,
@@ -140,8 +140,8 @@ class Monitor:
 
     def to_dict(self) -> dict:
         """
-
-        :return:
+        Convert the monitor object to a dict object containing the same data
+        :return: dict
         """
         dict_monitor: dict = {
             "adapter": {
@@ -207,37 +207,37 @@ class Monitor:
 
     def to_json(self, filepath: str):
         """
-
-        :param filepath:
+        Export the entire Monitor object to a json file described in the filepath
+        :param filepath: the file path including .json for storing a Monitor object
         """
         with open(filepath, 'w') as file:
-            json.dump(self.to_dict(), file, sort_keys=True, indent=4)
+            json.dump(self.to_dict(), file, ensure_ascii=False, indent=4)
 
     def replace_config(self, config: pywintypes.DEVMODEWType):
         """
         replace the config of the current monitor object with a config from another monitor object
-        :param config:
+        :param config: pywintypes.DEVMODEWType, no compatibility check
         """
         self.config = config
 
     def get_device_id(self) -> str:
         """
-        return the DeviceID of the monitor
-        :return:
+        return the DeviceID of this object
+        :return: string of Device ID
         """
         return self.device.DeviceID
 
     def get_device_key(self) -> str:
         """
-        return the DeviceKey of the monitor
-        :return:
+        return the DeviceKey of this object
+        :return: string of DeviceKey
         """
         return self.adapter.DeviceKey
 
     def get_device_string(self) -> str:
         """
-        return the DeviceString of the monitor
-        :return:
+        return the DeviceString of this object
+        :return: string of DeviceString
         """
         return self.device.DeviceString
 
@@ -359,8 +359,8 @@ class Monitors:
     def get_monitor_from_key(self, DeviceKey: str) -> Monitor:
         """
         find the monitor with the provided DeviceKey
-        :param DeviceKey:
-        :return: the first monitor with the provided DeviceKey
+        :param DeviceKey: a string matching DeviceKey of a Monitor object in this object
+        :return: the first Monitor object with the provided DeviceKey
         """
         for monitor in self.monitors:
             if monitor.get_device_key() == DeviceKey:
@@ -370,7 +370,7 @@ class Monitors:
     def get_monitor_from_id(self, DeviceID: str) -> Monitor:
         """
         find the monitor with the provided DeviceID
-        :param DeviceID:
+        :param DeviceID: a string matching DeviceID of a Monitor object in this object
         :return: the first monitor with the provided DeviceID
         """
         for monitor in self.monitors:
@@ -385,15 +385,15 @@ class Monitors:
         return monitors
 
 
-def main():
-    """
-    it's just for testing purposes
-    """
-    monitors = Monitors()
-    a = monitors.to_dict()
-    for monitor in monitors:
-        print(monitor.get_device_id())
+# def main():
+#     """
+#     it's just for testing purposes
+#     """
+#     monitors = Monitors()
+#     a = monitors.to_dict()
+#     for monitor in monitors:
+#         print(monitor.get_device_id())
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

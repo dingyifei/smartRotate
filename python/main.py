@@ -38,6 +38,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_ccw.clicked.connect(self.btn_ccw)
         self.pushButton_cw.clicked.connect(self.btn_cw)
 
+        self.pushButton_save.clicked.connect(self.btn_save)
+        self.pushButton_load.clicked.connect(self.btn_load)
         self.update_list()
 
     def update_monitors(self):
@@ -75,13 +77,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.monitors[self.get_selected_monitor_pos()].rotate_cw()
 
     def btn_load(self):
-        return 0
-        fp = ""
+        fp = QtWidgets.QFileDialog.getOpenFileName(self, self.tr("Choose A Json File"))[0]
         self.monitors[self.get_selected_monitor_pos()].replace_config(Monitor.from_json(fp).config)
 
     def btn_save(self):
-        return 0
-        fp = ""
+        fp = QtWidgets.QFileDialog.getSaveFileName(self, self.tr("Choose A Json File"))[0]
         self.monitors[self.get_selected_monitor_pos()].to_json(fp)
 
 

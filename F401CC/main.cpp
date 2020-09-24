@@ -12,7 +12,7 @@ DigitalOut led = LED1;
 USBHID usbHid(true,
               64,
               64,
-              0x1234,
+              0x2234,
               0x0006,
               0x0001);
 
