@@ -1,0 +1,4 @@
+
+[submodule "F401/lib/mpu6050"]
+	path = F401/lib/mpu6050
+	url = http://www.github.com/dingyifei/mpu6050
