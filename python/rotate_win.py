@@ -229,7 +229,7 @@ class Monitor:
 
     def get_device_key(self) -> str:
         """
-        return the DeviceKey of this object
+        return the DeviceKey of this object NOTE: DeviceKey Would Change!
         :return: string of DeviceKey
         """
         return self.adapter.DeviceKey
@@ -358,7 +358,7 @@ class Monitors:
 
     def get_monitor_from_key(self, DeviceKey: str) -> Monitor:
         """
-        find the monitor with the provided DeviceKey
+        find the monitor with the provided DeviceKey NOTE: DeviceKey Would Change!
         :param DeviceKey: a string matching DeviceKey of a Monitor object in this object
         :return: the first Monitor object with the provided DeviceKey
         """

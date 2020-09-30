@@ -25,10 +25,10 @@
 #include "rtc.h"
 #include "usb_device.h"
 #include "gpio.h"
-#include "MPU6050.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "MPU6050.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,17 +96,40 @@ int main(void)
   MX_ADC1_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  
+
+  MPU6050 mpu6050;
+  mpu6050.initialize();
+  if(mpu6050.testConnection()){
+      //initialize DMP with no instruction of how to do it
+      mpu6050.resetDMP();
+      mpu6050.CalibrateAccel();
+      mpu6050.CalibrateGyro();
+      mpu6050.setDMPEnabled(true);//Enable DMP
+      while (1)
+      {
+          /* USER CODE END WHILE */
+          int16_t rotations[3];
+          mpu6050.getRotation(&rotations[0], &rotations[1], &rotations[2]);
+          printf("%f, %f, %f", float(rotations[0]), float(rotations[1]), float(rotations[2]));
+          printf("%i, %i, %i", rotations[0], (rotations[1]), (rotations[2]));
+          /*uint8_t* data = new uint8_t();
+          HAL_I2C_IsDeviceReady(&hi2c1, 0x69<<1, 1, 100);
+          HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDRESS_AD0_LOW<<1, 0x6B, sizeof(uint8_t), data, sizeof(uint8_t), 100);*/
+          HAL_Delay(10);
+          /* USER CODE BEGIN 3 */
+      }
+  }else{
+      while(1){
+          HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+      }
+  }
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-  }
   /* USER CODE END 3 */
 }
 

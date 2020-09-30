@@ -1,11 +1,7 @@
 import os
+import pystray
 
 ICON = "ABC.jpg"
 
-import pystray
 
 icon = pystray.Icon('test name')
-
-
-
-
