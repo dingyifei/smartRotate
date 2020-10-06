@@ -11,6 +11,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "electron": "9.0.2"
+    "electron": "10.1.3"
   }
 }
