@@ -23,6 +23,7 @@
 #include "dma.h"
 #include "i2c.h"
 #include "rtc.h"
+#include "tim.h"
 #include "usb_device.h"
 #include "gpio.h"
 
@@ -95,6 +96,7 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
     MPU6050 mpu6050;
     mpu6050.initialize(); //Init MPU6050
@@ -107,11 +109,11 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
-        int16_t acceleration[3];
-        mpu6050.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
-        printf("floats: %f, %f, %f", float(acceleration[0]), float(acceleration[1]), float(acceleration[2]));
-        printf("ints: %i, %i, %i", acceleration[0], (acceleration[1]), (acceleration[2]));
-        HAL_Delay(10);
+    int16_t acceleration[3];
+    mpu6050.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
+    printf("floats: %f, %f, %f", float(acceleration[0]), float(acceleration[1]), float(acceleration[2]));
+    printf("ints: %i, %i, %i", acceleration[0], (acceleration[1]), (acceleration[2]));
+    HAL_Delay(10);
   }
     /* USER CODE END WHILE */
 
