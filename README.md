@@ -7,9 +7,9 @@
 
 and why they exist
 
-### ```F3DiscoveryMbed```
+### ```F401```
 
-it is the firmware for a F3Discovery Dev board written in C/C++ MBed. It allows the device to communicate with the computer with USB CDC to automatically change the orientation of linked monitor
+it is the firmware for my dev board written in C/C++ STM32CUBE. It allows the device to communicate with the computer using USBHID to report it's position.
 
 ### ```python```
 
