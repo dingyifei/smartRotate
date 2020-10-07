@@ -29,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "MPU6050.h"
+#include "accelerometer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,21 +98,14 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-    MPU6050 mpu6050;
-    mpu6050.initialize(); //Init MPU6050
-    HAL_Delay(100);
-    if(mpu6050.testConnection()){ //Operational indicator
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-    }
+  Accel_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
     int16_t acceleration[3];
-    mpu6050.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
-    printf("floats: %f, %f, %f", float(acceleration[0]), float(acceleration[1]), float(acceleration[2]));
-    printf("ints: %i, %i, %i", acceleration[0], (acceleration[1]), (acceleration[2]));
+    mpu.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
     HAL_Delay(10);
   }
     /* USER CODE END WHILE */
