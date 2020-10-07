@@ -30,12 +30,13 @@ if (CMAKE_BUILD_TYPE MATCHES "genericSTM32F401CC")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/Class")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/Drivers/STM32F4xx_HAL_Driver/Inc")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/mpu6050/src")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/CMSIS/Include")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/CMSIS/Device/ST/STM32F4xx/Include")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/STM32F4xx_HAL_Driver/Inc")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/BSP/Components/Common")
-    include_directories("${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/Drivers/STM32F4xx_HAL_Driver/Src")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/BSP/Components/ampire480272")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/BSP/Components/ampire640480")
     include_directories("$ENV{HOMEDRIVE}$ENV{HOMEPATH}/.platformio/packages/framework-stm32cube/f4/Drivers/BSP/Components/cs43l22")
@@ -71,9 +72,9 @@ if (CMAKE_BUILD_TYPE MATCHES "genericSTM32F401CC")
 
     FILE(GLOB_RECURSE EXTRA_LIB_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/genericSTM32F401CC/*.*
-        ${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/Class/*.*
         ${CMAKE_CURRENT_LIST_DIR}/Middlewares/ST/STM32_USB_Device_Library/*.*
         ${CMAKE_CURRENT_LIST_DIR}/lib/mpu6050/src/*.*
+        ${CMAKE_CURRENT_LIST_DIR}/Drivers/STM32F4xx_HAL_Driver/*.*
     )
 endif()
 

@@ -30,6 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "accelerometer.h"
+#include "usb.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,9 +105,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
-    int16_t acceleration[3];
-    mpu.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
-    HAL_Delay(10);
+    //Waiting for interrupts
   }
     /* USER CODE END WHILE */
 
