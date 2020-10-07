@@ -92,7 +92,50 @@
 __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
 {
   /* USER CODE BEGIN 0 */
-  0x00,
+  //My current plan is to emulate a HID Monitor device.
+  0x50, 0x80,       // USAGE_PAGE (Monitor)
+  0x09, 0x01,       // USAGE (Monitor Control)
+  0xA1, 0x01,       // COLLECTION (Application)
+  0x85, 0x01,       // REPORT_ID (1)
+  0x15, 0x00,       // LOGICAL_MINIMUM (0)
+  0x26, 0xFF, 0x00, // LOGICAL_MAXIMUM (255)
+  0x75, 0x08,       // REPORT_SIZE (8)
+  0x95, 0x80,       // REPORT_COUNT (128)
+  0x09, 0x02,       // USAGE (EDID Information)
+  0xB2, 0x02, 0x01, // FEATURE (Data,Var,Abs,Buf)
+  0x85, 0x02,       // REPORT_ID (2)
+  0x95, 0xF3,       // REPORT_COUNT (243)
+  0x09, 0x03,       // USAGE (VDIF Information)
+  0xB2, 0x02, 0x01, // FEATURE (Data,Var,Abs,Buf)
+  0x85, 0x03,       // REPORT_ID (3)
+  0x05, 0x82,       // USAGE_PAGE (VESA Virtual Controls)
+  0x95, 0x01,       // REPORT_COUNT (1)
+  0x75, 0x10,       // REPORT_SIZE (16)
+  0x26, 0xC8, 0x00, // LOGICAL_MAXIMUM (200)
+  0x09, 0x10,       // USAGE (Bright)
+  0xB1, 0x02,       // FEATURE (Data,Var,Abs)
+  0x85, 0x04,       // REPORT_ID (4)
+  0x25, 0x64,       // LOGICAL_MAXIMUM (100)
+  0x09, 0x12,       // USAGE (Contrast)
+  0xB1, 0x02,       // FEATURE (Data,Var,Abs
+  0x95, 0x06,       // REPORT_COUNT (6)
+  0x26, 0xFF, 0x00, // LOGICAL_MAXIMUM (255)
+  0x09, 0x16,       // USAGE (Video Gain Red)
+  0x09, 0x18,       // USAGE (Video Gain Green)
+  0x09, 0x1A,       // USAGE (Video Gain Blue)
+  0x09, 0x6C,       // USAGE (Video Black Level Red)
+  0x09, 0x6E,       // USAGE (Video Black Level Green)
+  0x09, 0x70,       // USAGE (Video Black Level Blue)
+  0xB1, 0x02,       // FEATURE (Data,Var,Abs)
+  0x85, 0x05,       // REPORT_ID (5)
+  0x25, 0x7F,       // LOGICAL_MAXIMUM (127)
+  0x09, 0x20,       // USAGE (Horizontal Position)
+  0x09, 0x22,       // USAGE (Horizontal Size)
+  0x09, 0x30,       // USAGE (Vertical Position)
+  0x09, 0x32,       // USAGE (Vertical Size)
+  0x09, 0x42,       // USAGE (Trapezoidal Distortion)
+  0x09, 0x44,       // USAGE (Tilt)
+  0xB1, 0x02,       // FEATURE (Data,Var,Abs)
   /* USER CODE END 0 */
   0xC0    /*     END_COLLECTION	             */
 };
