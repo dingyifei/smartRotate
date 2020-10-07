@@ -95,27 +95,24 @@ int main(void) {
     MX_ADC1_Init();
     MX_I2C1_Init();
     /* USER CODE BEGIN 2 */
-
     MPU6050 mpu6050;
-    mpu6050.initialize();
-    HAL_Delay(20);
-    if (mpu6050.testConnection()) {
-            /* USER CODE END 2 */
-        /* Infinite loop */
-        while (1) {
-            /* USER CODE BEGIN WHILE */
-            int16_t acceleration[3];
-            mpu6050.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
-            printf("floats: %f, %f, %f", float(acceleration[0]), float(acceleration[1]), float(acceleration[2]));
-            printf("ints: %i, %i, %i", acceleration[0], (acceleration[1]), (acceleration[2]));
-            HAL_Delay(10);
-        }
-    } else {
-        while (1) {
-            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-        }
+    mpu6050.initialize(); //Init MPU6050
+    HAL_Delay(100);
+    if(mpu6050.testConnection()){ //Operational indicator
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
     }
-    /* USER CODE END WHILE */
+    /* USER CODE END 2 */
+
+    /* Infinite loop */
+    while (1) {
+        /* USER CODE BEGIN WHILE */
+        int16_t acceleration[3];
+        mpu6050.getAcceleration(&acceleration[0], &acceleration[1], &acceleration[2]);
+        printf("floats: %f, %f, %f", float(acceleration[0]), float(acceleration[1]), float(acceleration[2]));
+        printf("ints: %i, %i, %i", acceleration[0], (acceleration[1]), (acceleration[2]));
+        HAL_Delay(10);
+        /* USER CODE END WHILE */
+    }
 
 
     /* USER CODE BEGIN 3 */
