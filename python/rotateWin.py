@@ -318,7 +318,7 @@ class Monitor:
 
 def get_monitors() -> list:
     """
-    this function return a list of monitors recognize by the computer
+    return a list of monitors recognize by the computer
     :return: A list of Monitor objects
     """
     displays = []
@@ -385,15 +385,12 @@ class Monitors:
         return monitors
 
 
-# def main():
-#     """
-#     it's just for testing purposes
-#     """
-#     monitors = Monitors()
-#     a = monitors.to_dict()
-#     for monitor in monitors:
-#         print(monitor.get_device_id())
+def main():
+    """
+    it's just for testing purposes
+    """
+    print("Launch main.py plz")
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

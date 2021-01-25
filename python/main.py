@@ -20,7 +20,7 @@ from PyQt5 import QtWidgets
 from mainWindow import Ui_MainWindow
 
 if os.name == "nt":
-    from rotate_win import *
+    from rotateWin import *
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
