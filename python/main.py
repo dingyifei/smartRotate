@@ -1,5 +1,5 @@
 """
-Copyright (c) 2020-2020, Yifei Ding
+Copyright (c) 2020-2021, Yifei Ding
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,15 @@ See the License for the specific language governing permissions and limitations 
 import os
 import sys
 from PyQt5 import QtWidgets
-
+from PyQt5.QtGui import QIcon
 from mainWindow import Ui_MainWindow
-
+from daemon import Ui_Tray
 if os.name == "nt":
     from rotateWin import *
 
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, monitors: Monitors = Monitors(), *args, obj=None, **kwargs):
-        self.monitors = Monitors()
+        self.monitors = monitors
 
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
@@ -85,11 +84,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.monitors[self.get_selected_monitor_pos()].to_json(fp)
 
 
+class Tray(QtWidgets.QSystemTrayIcon, Ui_Tray):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(Tray, self).__init__(*args, **kwargs)
+        self.setupUi(self)
+
+        self.tray.setIcon(QIcon("icon.png"))
+        self.quit.triggered.connect(self.action_quit)
+    def action_quit(self):
+        print("quit")
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    app.exec()
+    tray = Tray()
+    app.exec_()
 
 
 if __name__ == "__main__":

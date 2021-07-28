@@ -1,7 +1,11 @@
-import os
-import pystray
+from PyQt5.QtGui import * 
+from PyQt5.QtWidgets import * 
 
-ICON = "ABC.jpg"
-
-
-icon = pystray.Icon('test name')
+class Ui_Tray(object):
+    def setupUi(self, Tray: QSystemTrayIcon):
+        self.tray = Tray
+        self.menu = QMenu()
+        self.quit = QAction("Quit")
+        self.menu.addAction(self.quit)
+        Tray.setContextMenu(self.menu)
+        
