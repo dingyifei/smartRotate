@@ -1,0 +1,16 @@
+{
+  "name": "erratic-painting-expedite-50bd8",
+  "productName": "erratic-painting-expedite-50bd8",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "13676",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "10.1.3"
+  }
+}

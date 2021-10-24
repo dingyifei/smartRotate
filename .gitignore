@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -391,4 +390,6 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/c,cmake,clion,python
-F3DiscoveryMbed/cmake-build-debug/
+
+*.json
+F401CC/GettingStarted.html

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2020-2020, Yifei Ding
+Copyright (c) 2020-2021, Yifei Ding
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,72 +13,91 @@ either express or implied.
 
 See the License for the specific language governing permissions and limitations under the License.
 """
-from tkinter import *
-import rotate
+import os
+import sys
+from PyQt5 import QtWidgets
+from PyQt5.QtGui import QIcon
+from mainWindow import Ui_MainWindow
+from daemon import Ui_Tray
+if os.name == "nt":
+    from rotateWin import *
+
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, monitors: Monitors = Monitors(), *args, obj=None, **kwargs):
+        self.monitors = monitors
+
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setupUi(self)
+
+        self.pushButton_default.clicked.connect(self.btn_default)
+        self.pushButton_90.clicked.connect(self.btn_90)
+        self.pushButton_180.clicked.connect(self.btn_180)
+        self.pushButton_270.clicked.connect(self.btn_270)
+
+        self.pushButton_ccw.clicked.connect(self.btn_ccw)
+        self.pushButton_cw.clicked.connect(self.btn_cw)
+
+        self.pushButton_save.clicked.connect(self.btn_save)
+        self.pushButton_load.clicked.connect(self.btn_load)
+        self.update_list()
+
+    def update_monitors(self):
+        self.monitors = Monitors()
+
+    def update_list(self):
+        self.update_monitors()
+        self.comboBox.clear()
+        for monitor in self.monitors:
+            self.comboBox.addItem("%s (%s)" % (monitor.get_device_string(), monitor.get_device_id()))
+
+    def get_selected_monitor_pos(self) -> int:
+        currentIndex = self.comboBox.currentIndex()
+        if currentIndex == -1:
+            return 0
+        else:
+            return currentIndex
+
+    def btn_default(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_default()
+
+    def btn_90(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_90()
+
+    def btn_180(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_180()
+
+    def btn_270(self):
+        self.monitors[self.get_selected_monitor_pos()].rotation_270()
+
+    def btn_ccw(self):
+        self.monitors[self.get_selected_monitor_pos()].rotate_ccw()
+
+    def btn_cw(self):
+        self.monitors[self.get_selected_monitor_pos()].rotate_cw()
+
+    def btn_load(self):
+        fp = QtWidgets.QFileDialog.getOpenFileName(self, self.tr("Choose A Json File"))[0]
+        self.monitors[self.get_selected_monitor_pos()].replace_config(Monitor.from_json(fp).config)
+
+    def btn_save(self):
+        fp = QtWidgets.QFileDialog.getSaveFileName(self, self.tr("Choose A Json File"))[0]
+        self.monitors[self.get_selected_monitor_pos()].to_json(fp)
 
 
-def cmd_ccw():
+class Tray(QtWidgets.QSystemTrayIcon, Ui_Tray):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(Tray, self).__init__(*args, **kwargs)
+        self.setupUi(self)
 
-    return 0
-
-
-def cmd_cw():
-    return 0
-
-
-def cmd_rst():
-    return 0
-
-
-def cmd_bind():
-    return 0
-
+        self.tray.setIcon(QIcon("icon.png"))
+        self.quit.triggered.connect(self.action_quit)
+    def action_quit(self):
+        print("quit")
 
 def main():
-    """
-    This is the GUI for rotating display, etc
-    """
-    main_window = Tk()
-    main_window.title("Smart Rotate")
-    main_frame = Frame(main_window)
-    main_frame.grid(sticky=(N, W, E, S))
-    # main_window.columnconfigure()
-    # main_window.rowconfigure()
-    x_rotation = IntVar()
-    y_rotation = IntVar()
-    z_rotation = IntVar()
-    orientation = StringVar()
-
-    label_x_rotation = Label(main_frame, text="X Rotation:")
-    label_x_rotation.grid(column=0, row=0, sticky=W)
-    label_y_rotation = Label(main_frame, text="Y Rotation:")
-    label_y_rotation.grid(column=0, row=1, sticky=W)
-    label_z_rotation = Label(main_frame, text="Z Rotation:")
-    label_z_rotation.grid(column=0, row=2, sticky=W)
-    label_orientation = Label(main_frame, text="Orientation:")
-    label_orientation.grid(column=0, row=3, sticky=W)
-    menubutton_display = Listbox(main_frame)
-    menubutton_display.grid(column=0, row=4, sticky=W, columnspan=2)
-
-    label_x_reading = Label(main_frame, textvariable=x_rotation)
-    label_x_reading.grid(column=1, row=0, sticky=W)
-    label_y_reading = Label(main_frame, textvariable=y_rotation)
-    label_y_reading.grid(column=1, row=1, sticky=W)
-    label_z_reading = Label(main_frame, textvariable=z_rotation)
-    label_z_reading.grid(column=1, row=2, sticky=W)
-    label_orientation = Label(main_frame, textvariable=orientation)
-    label_orientation.grid(column=1, row=3, sticky=W)
-
-    btn_ccw = Button(main_frame, text="CCW Turn", command=cmd_ccw)
-    btn_ccw.grid(column=2, row=0, sticky=EW, ipadx=5)
-    btn_cw = Button(main_frame, text="CW Turn", command=cmd_cw)
-    btn_cw.grid(column=2, row=1, sticky=EW, ipadx=5)
-    btn_rst = Button(main_frame, text="Reset", command=cmd_rst)
-    btn_rst.grid(column=2, row=2, sticky=EW, ipadx=5)
-    btn_bind = Button(main_frame, text="Bind", command=cmd_bind)
-    btn_bind.grid(column=2, row=3, sticky=EW, ipadx=5)
-
-    main_window.mainloop()
+    app = QtWidgets.QApplication(sys.argv)
+    tray = Tray()
+    app.exec_()
 
 
 if __name__ == "__main__":
